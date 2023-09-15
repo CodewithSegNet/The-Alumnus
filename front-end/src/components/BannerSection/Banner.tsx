@@ -84,7 +84,7 @@ export function BannerSlider() {
           </p>
           <Button
             radius="full"
-            className=" bg-primary text-white shadow-lg w-fit my-4 px-6 py-1"
+            className=" primaryColor text-white shadow-lg w-fit my-4 px-6 py-1"
           >
             READ MORE
           </Button>

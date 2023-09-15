@@ -3,12 +3,12 @@ import {
   Container,
   Group,
   Header,
-  Menu,
   createStyles,
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "./../assets/Home/logo.png";
 
 const useStyles = createStyles((theme) => ({
@@ -62,7 +62,7 @@ interface HeaderSearchProps {
 
 const links: HeaderSearchProps[] = [
   {
-    link: "/about",
+    link: "/",
     label: "Home",
   },
   {
@@ -70,12 +70,16 @@ const links: HeaderSearchProps[] = [
     label: "About Us",
   },
   {
-    link: "/pricing",
-    label: "Forum",
+    link: "/events",
+    label: "Events",
   },
   {
-    link: "/pricing",
-    label: "Blog",
+    link: "/login",
+    label: "login",
+  },
+  {
+    link: "/signup",
+    label: "Sign-Up",
   },
 ];
 export function HeaderComponent() {
@@ -83,19 +87,10 @@ export function HeaderComponent() {
   const { classes } = useStyles();
 
   const items = links.map((link) => {
-    const menuItems = links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
-    ));
-
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={`${classes.link} text-primary`}
-        onClick={(event) => event.preventDefault()}
-      >
+      <Link className={`${classes.link} text-primary`} href={link.link}>
         {link.label}
-      </a>
+      </Link>
     );
   });
 

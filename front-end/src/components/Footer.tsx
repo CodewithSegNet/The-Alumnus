@@ -17,7 +17,6 @@ import logo from "./../assets/Home/logo.png";
 
 const useStyles = createStyles((theme) => ({
   footer: {
-    marginTop: rem(120),
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
     backgroundColor:

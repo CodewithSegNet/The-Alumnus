@@ -2,7 +2,10 @@
 import AboutComponent from "@/components/AboutComponent";
 import { BannerSlider } from "@/components/BannerSection/Banner";
 import BaseLayout from "@/components/BaseLayout";
+import Executives from "@/components/Executives";
+import Faq from "@/components/Faq";
 import GalleryComponent from "@/components/GalleryComponent";
+import Reviews from "@/components/Reviews";
 import CardSectionComponent from "@/components/cardSection";
 
 import { Inter } from "next/font/google";
@@ -28,11 +31,17 @@ export default function Home() {
         <section className="mt-[55px] mx-[100px]">
           <CardSectionComponent />
         </section>
-        <section className="mt-[55px] bg-primary">
+        <section className="mt-[55px] primaryColor">
           <AboutComponent />
         </section>
         <section className="mt-[55px] ">
           <GalleryComponent />
+        </section>
+        <section className="mt-[55px] ">
+          <Executives />
+        </section>
+        <section className="mt-[55px] ">
+          <Reviews />
         </section>
       </BaseLayout>
     </main>

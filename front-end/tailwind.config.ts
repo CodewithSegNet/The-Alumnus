@@ -8,6 +8,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements-react/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -22,6 +23,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [nextui(), require("tw-elements-react/dist/plugin.cjs")],
 };
 export default config;

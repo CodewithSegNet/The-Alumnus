@@ -1,7 +1,16 @@
-import { Card, CardBody, Image, useDisclosure } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Image,
+  Input,
+  useDisclosure,
+} from "@nextui-org/react";
+import React from "react";
 import ModalComponent from "./Modal";
 const GalleryComponent = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [value, setValue] = React.useState("");
 
   const list = [
     {
@@ -49,9 +58,9 @@ const GalleryComponent = () => {
   };
 
   return (
-    <div className="px-[100px]">
-      <h3 className="text-3xl text-center mb-8">About The Alumnus</h3>
-      <div className="gap-2 grid grid-cols-4 sm:grid-cols-4">
+    <div className="">
+      <h3 className="text-3xl text-center mb-8">Gallery Section</h3>
+      <div className="gap-2 grid grid-cols-4 sm:grid-cols-4 px-[100px]">
         {list.map((item, index) => (
           <Card
             shadow="sm"
@@ -69,13 +78,35 @@ const GalleryComponent = () => {
                 src={item.img}
               />
             </CardBody>
-            <ModalComponent
-              isOpen={isOpen}
-              onClose={onClose}
-              item={item}
-            />
+            <ModalComponent isOpen={isOpen} onClose={onClose} item={item} />
           </Card>
         ))}
+      </div>
+      <div className="primaryColor py-10 mt-10">
+        <div className="  text-white w-[50%] mx-auto">
+          <h1 className="text-3xl text-center capitalize">
+            subscribe to our weekly/monthly newsletter
+          </h1>
+          <div className="flex w-full  md:flex-nowrap mb-6 gap-4 mt-10">
+            <Input
+              radius="none"
+              size="sm"
+              value={value}
+              className="border-white"
+              type="email Address"
+              onChange={(e) => setValue(e.target.value)}
+              variant="bordered"
+              label="Email"
+            />
+            <Button
+              onClick={() => console.log(value)}
+              size="md"
+              className="bg-white text-primary rounded-none py-6 px-8"
+            >
+              Primary
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

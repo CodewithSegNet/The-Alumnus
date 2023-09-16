@@ -10,6 +10,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "./../assets/Home/logo.png";
+import { SideNavBar } from "./SideNavBar";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -95,27 +96,36 @@ export function HeaderComponent() {
   });
 
   return (
-    <Header className={classes.positionFixed} height={56} mb={120}>
-      <Container>
-        <div className={classes.inner}>
-          {/* <MantineLogo size={28} /> */}
-          <div className="">
-            <Image alt="logo" src={logo} width={30} height={30} />
+    <section className="relative">
+      <Header className={classes.positionFixed} height={56} mb={120}>
+        <Container>
+          <div className={classes.inner}>
+            {/* <MantineLogo size={28} /> */}
+            <div className="">
+              <Image alt="logo" src={logo} width={30} height={30} />
+            </div>
+            <Group
+              spacing={5}
+              className={`${classes.links} text-[16px] font-medium`}
+            >
+              {items}
+            </Group>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              className={classes.burger}
+              size="sm"
+            />
           </div>
-          <Group
-            spacing={5}
-            className={`${classes.links} text-[16px] font-medium`}
-          >
-            {items}
-          </Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            className={classes.burger}
-            size="sm"
-          />
+        </Container>
+      </Header>
+      {opened ? (
+        <div>
+          <div className="fixed top-12 left-0 h-screen bottom-0 z-50 bg-white">
+            <SideNavBar />
+          </div>
         </div>
-      </Container>
-    </Header>
+      ) : null}
+    </section>
   );
 }

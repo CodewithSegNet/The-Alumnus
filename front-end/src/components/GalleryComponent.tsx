@@ -60,7 +60,7 @@ const GalleryComponent = () => {
   return (
     <div className="">
       <h3 className="text-3xl text-center mb-8">Gallery Section</h3>
-      <div className="gap-2 grid grid-cols-4 sm:grid-cols-4 px-[100px]">
+      <div className="gap-2 grid grid-cols-2 lg:grid-cols-4 lg:px-[100px] px-[20px]">
         {list.map((item, index) => (
           <Card
             shadow="sm"
@@ -83,7 +83,7 @@ const GalleryComponent = () => {
         ))}
       </div>
       <div className="primaryColor py-10 mt-10">
-        <div className="  text-white w-[50%] mx-auto">
+        <div className="  text-white lg:w-[50%] px-[20px] mx-auto">
           <h1 className="text-3xl text-center capitalize">
             subscribe to our weekly/monthly newsletter
           </h1>

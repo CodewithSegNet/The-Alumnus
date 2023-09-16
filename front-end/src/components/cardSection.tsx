@@ -1,48 +1,127 @@
-import { Button, Card, CardFooter, CardHeader, Image } from "@nextui-org/react";
+import {
+  Badge,
+  Card,
+  Container,
+  Group,
+  SimpleGrid,
+  Text,
+  Title,
+  createStyles,
+  rem,
+} from "@mantine/core";
+import { IconCookie, IconGauge, IconUser } from "@tabler/icons-react";
+
+const mockdata = [
+  {
+    title: "Extreme performance",
+    description:
+      "This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit",
+    icon: IconGauge,
+  },
+  {
+    title: "Privacy focused",
+    description:
+      "People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma",
+    icon: IconUser,
+  },
+  {
+    title: "No third parties",
+    description:
+      "They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves",
+    icon: IconCookie,
+  },
+];
+
+const useStyles = createStyles((theme) => ({
+  title: {
+    fontSize: rem(34),
+    fontWeight: 900,
+
+    [theme.fn.smallerThan("sm")]: {
+      fontSize: rem(24),
+    },
+  },
+
+  description: {
+    maxWidth: 600,
+    margin: "auto",
+
+    "&::after": {
+      content: '""',
+      display: "block",
+      backgroundColor: "#03045E",
+      width: rem(45),
+      height: rem(2),
+      marginTop: theme.spacing.sm,
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+
+  card: {
+    border: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
+    }`,
+  },
+
+  cardTitle: {
+    "&::after": {
+      content: '""',
+      display: "block",
+      backgroundColor: "#03045E",
+      width: rem(45),
+      height: rem(2),
+      marginTop: theme.spacing.sm,
+    },
+  },
+}));
 
 const CardSectionComponent = () => {
+  const { classes, theme } = useStyles();
+  const features = mockdata.map((feature) => (
+    <Card
+      key={feature.title}
+      shadow="md"
+      radius="md"
+      className={classes.card}
+      padding="xl"
+    >
+      <feature.icon size={rem(50)} stroke={2} color={"#03045E"} />
+      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+        {feature.title}
+      </Text>
+      <Text fz="sm" c="dimmed" mt="sm">
+        {feature.description}
+      </Text>
+    </Card>
+  ));
+
   return (
-    <div className="grid grid-cols-4  ">
-      <div className="">
-        <Card
-          isFooterBlurred
-          className="w-full h-[300px] col-span-12  sm:col-span-7"
-        >
-          <CardHeader className="absolute z-10 top-1 flex-col items-start">
-            <p className="text-tiny text-white/60 uppercase font-bold">
-              Your day your way
-            </p>
-            <h4 className="text-white/90 font-medium text-xl">
-              Your checklist for better sleep
-            </h4>
-          </CardHeader>
-          <Image
-            removeWrapper
-            alt="Relaxing app background"
-            className="z-0 w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-          />
-          <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
-            <div className="flex flex-grow gap-2 items-center">
-              <Image
-                alt="Breathing app icon"
-                className="rounded-full w-10 h-11 bg-black"
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-              />
-              <div className="flex flex-col">
-                <p className="text-tiny text-white/60">Breathing App</p>
-                <p className="text-tiny text-white/60">
-                  Get a good night's sleep.
-                </p>
-              </div>
-            </div>
-            <Button radius="full" size="sm">
-              Get App
-            </Button>
-          </CardFooter>
-        </Card>
-      </div>
-    </div>
+    <Container size="lg" py="xl">
+      <Group position="center">
+        <Badge color="#03045E" variant="filled" size="lg">
+          Best company ever
+        </Badge>
+      </Group>
+
+      <Title order={2} className={classes.title} ta="center" mt="sm">
+        Integrate effortlessly with any technology stack
+      </Title>
+
+      <Text c="dimmed" className={classes.description} ta="center" mt="md">
+        Every once in a while, you’ll see a Golbat that’s missing some fangs.
+        This happens when hunger drives it to try biting a Steel-type Pokémon.
+      </Text>
+
+      <SimpleGrid
+        cols={3}
+        spacing="xl"
+        mt={50}
+        breakpoints={[{ maxWidth: "md", cols: 1 }]}
+      >
+        {features}
+      </SimpleGrid>
+    </Container>
   );
 };
 

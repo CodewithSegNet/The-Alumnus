@@ -29,10 +29,10 @@ const excoData = [
 const Executives = () => {
   return (
     <section className="">
-      <div className="mx-[100px] ">
+      <div className="lg:mx-[100px] mx-[20px] ">
         <div className="text-white text-center py-8">
           <h3 className="text-3xl text-primary">Executive Board</h3>
-          <p className="py-2 w-1/2 mx-auto text-lg text-black">
+          <p className="py-2 lg:w-1/2 px-5 mx-auto text-lg text-black">
             Horem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
             turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
             nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
@@ -41,7 +41,7 @@ const Executives = () => {
           </p>
         </div>
         {/* excos */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid  sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {excoData.map((item) => {
             return (
               <Card className="py-4">

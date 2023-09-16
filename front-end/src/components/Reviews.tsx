@@ -11,7 +11,7 @@ import React from "react";
 const Reviews = () => {
   const [isFollowed, setIsFollowed] = React.useState(false);
   return (
-    <section className="primaryColor text-white pb-20 pt-10 px-[100px]">
+    <section className="primaryColor text-white pb-20 pt-10 lg:px-[100px] px-[20px]">
       <h1 className="text-3xl text-center">Alumni Reviews</h1>
       <Card className="max-w-[340px] bg-gray-600/50 text-white mt-10">
         <CardHeader className="justify-between">

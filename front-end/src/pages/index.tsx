@@ -25,10 +25,10 @@ export default function Home() {
       </Head>
       {/* the main page ui starts here */}
       <BaseLayout>
-        <section className="mt-[65px] mx-[100px]">
+        <section className="mt-[65px] lg:mx-[100px] mx-[20px]">
           <BannerSlider />
         </section>
-        <section className="mt-[55px] mx-[100px]">
+        <section className="mt-[55px] lg:mx-[100px] mx-[20px]">
           <CardSectionComponent />
         </section>
         <section className="mt-[55px] primaryColor">

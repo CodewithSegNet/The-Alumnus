@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { Button } from "@nextui-org/react";
 import Autoplay from "embla-carousel-autoplay";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 
 const useStyles = createStyles((theme) => ({
@@ -60,6 +61,7 @@ const images = [
 export function BannerSlider() {
   const { classes } = useStyles();
   const autoplay = useRef(Autoplay({ delay: 2000 }));
+  const router = useRouter();
 
   const slides = images.map((image) => (
     <Carousel.Slide key={image}>
@@ -75,16 +77,22 @@ export function BannerSlider() {
             <Text align="center">This image contained the meaning of life</Text>
           }
         />
-        <div className="absolute z-50 top-0 left-0 right-0 h-full flex flex-col justify-center w-[80%] px-[100px]">
-          <h3 className="text-white text-[80px]">The Alumnus</h3>
-          <p className="w-[70%]  text-white  text-[20px]">
+        <div className="absolute z-50 top-0 left-0 right-0 h-full flex flex-col justify-center lg:w-[80%] lg:px-[100px] px-[20px]">
+          <h3 className="text-white lg:text-[80px] text-[50px]">The Alumnus</h3>
+          <p className="lg:w-[70%]  text-white  text-[20px]">
             Build fully functional accessible web applications faster than ever
             – Mantine includes more than 120 customizable components and hooks
             to cover you in any situation
           </p>
           <Button
             radius="full"
-            className=" primaryColor text-white shadow-lg w-fit my-4 px-6 py-1"
+            onClick={() => {
+              router.push({ pathname: "/about" });
+            }}
+            style={{
+              backgroundColor: "#03045E",
+            }}
+            className="primaryColor text-white shadow-lg w-fit my-4 px-6 py-1"
           >
             READ MORE
           </Button>

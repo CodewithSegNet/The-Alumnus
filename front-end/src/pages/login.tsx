@@ -13,7 +13,7 @@ const Login = () => {
   return (
     <BaseLayout>
       <section className="h-full overflow-y-auto mt-14">
-        <div className="lg:container mx-auto h-full p-10">
+        <div className="lg:container mx-auto h-full px-2 pt-10 lg:p-10">
           <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
             <div className="w-full">
               <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">

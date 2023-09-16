@@ -3,9 +3,12 @@ import {
   IconBellRinging,
   IconDatabaseImport,
   IconFingerprint,
+  IconHome2,
   IconKey,
+  IconLogin,
   IconLogout,
   IconReceipt2,
+  IconUserCircle,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -80,11 +83,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: "/", label: "Home", icon: IconBellRinging },
-  { link: "/about", label: "About Us", icon: IconReceipt2 },
+  { link: "/", label: "Home", icon: IconHome2 },
+  { link: "/about", label: "About Us", icon: IconHome2 },
   { link: "/events", label: "Events", icon: IconFingerprint },
-  { link: "/login", label: "Login", icon: IconKey },
-  { link: "/signup", label: "Signup", icon: IconDatabaseImport },
+  { link: "/login", label: "Login", icon: IconLogin },
+  { link: "/signup", label: "Signup", icon: IconUserCircle },
+  { link: "/", label: "Log out", icon: IconLogout},
 ];
 
 export function SideNavBar() {

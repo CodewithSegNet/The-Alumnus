@@ -2,11 +2,8 @@
 
 # Import Dependencies
 from flask_sqlalchemy import SQLAlchemy
-
-
-# Initialize Sqlalchemy
-db = SQLAlchemy()
-
+from sqlalchemy.exc import SQLAlchemyError
+from app.app import db
 
 # Define the Model
 class UserProfile(db.Model):

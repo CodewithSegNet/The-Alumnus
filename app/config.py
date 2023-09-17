@@ -38,5 +38,5 @@ config_map = {
 }
 
 # Set the active configuration based on an environment variable
-active_env = os.getenv('FLASK_ENV', 'development')
+active_env = os.getenv('FLASK_ENV', 'testing')
 config = config_map[active_env]

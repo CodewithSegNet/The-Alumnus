@@ -33,9 +33,11 @@ def register():
         db.session.commit()
 
         return jsonify({"message": "User registration successful!"}), 201
+        return redirect(url_for('login'))
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
 
 
 # Route for user login

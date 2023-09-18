@@ -4,7 +4,7 @@
 from flask import request, jsonify, session, redirect, url_for
 from app.app import create_app, db
 from sqlalchemy.exc import SQLAlchemyError
-from app.Models.user_model import UserProfile
+from app.model.user_model import UserProfile
 from sqlalchemy import or_
 
 # create the app instance

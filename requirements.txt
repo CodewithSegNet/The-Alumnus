@@ -1,3 +1,7 @@
 Flask
 Flask-SQLAlchemy
 pymysql
+PyJWT
+Werkzeugi
+python-dotenv
+python-decouple

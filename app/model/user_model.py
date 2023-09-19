@@ -5,10 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from app.app import db
 
+
 # Define the Model
 class UserProfile(db.Model):
     ''' A class that defines the userProfile
     '''
+    __tablename__ = 'users_profile'
+
+
     alumni_id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     middle_name = db.Column(db.String(50), nullable=False)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import unittest
 from app.app import create_app, db
-from app.Views.user_views import app
+from app.controller.user_controller import app
 from flask import json
 
 
@@ -23,6 +23,17 @@ class TestRoutes(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.ctx.pop()
+
+    def test_index(self):
+        data  = {
+                "key1": "valuel",
+                "key2": "value2"
+                }
+        response = self.app.get('/', json=data)
+        print(response.status_code)
+        print(response.data)
+        self.assertEqual(response.status_code, 200)
+
 
     def test_register(self):
         # Test the registration route

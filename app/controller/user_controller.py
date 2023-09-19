@@ -1,17 +1,21 @@
 #!/usr/bin/python3
 
 # Import Modules
-from flask import request, jsonify, session, redirect, url_for
-from app.app import create_app, db
+from flask import Blueprint, request, jsonify, session, redirect, url_for
+from app.app import create_app
+from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from app.model.user_model import UserProfile
 from sqlalchemy import or_
+import pymysql
 
-# create the app instance
+user_bp = Blueprint('user', __name__)
 app = create_app()
+db = app.db
+
 
 # Route for registrating a new user
-@app.route('/register', methods=['POST'])
+@user_bp.route('/register', methods=['POST'])
 def register():
     ''' A route that handles user registration
     '''
@@ -28,6 +32,12 @@ def register():
             confirm_password=data['confirm_password']
         )
 
+        # Check if the username is already taken
+        if UserProfile.query.filter_by(username=new_user.username).first():
+            suggested_username = suggest_username(new_user.username)
+            return jsonify({"message": "Username already taken, Try {} instead".format(suggested_username)})
+    
+
         # Add the new user to the database
         db.session.add(new_user)
         db.session.commit()
@@ -41,7 +51,7 @@ def register():
 
 
 # Route for user login
-@app.route('/login', methods=['POST'])
+@user_bp.route('/login', methods=['POST'])
 def login():
     ''' A route that handles the user login
     '''
@@ -72,7 +82,7 @@ def login_required(f):
 
 
 # Route for deleting user data by username
-@app.route('/users/<username>', methods=['DELETE'])
+@user_bp.route('/users/<username>', methods=['DELETE'])
 def delete_user(username):
     try:
         user = UserProfile.query.filter_by(username=username).first()
@@ -88,7 +98,7 @@ def delete_user(username):
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/users/<int:grad_year>', methods=['GET'])
+@user_bp.route('/users/<int:grad_year>', methods=['GET'])
 @login_required
 def get_user_by_class():
     try:
@@ -104,7 +114,7 @@ def get_user_by_class():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/users/<string:name>', methods=['GET'])
+@user_bp.route('/users/<string:name>', methods=['GET'])
 @login_required
 def get_user_by_name():
     try:
@@ -128,6 +138,16 @@ def get_user_by_name():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# function to suggest a unique username
+def suggest_username(username):
+    counter = 1
+    suggested_username = username
+        
+    while UserProfile.query.filter_by(username=suggested_username).first():
+        suggested_username = "{}{}".format(username, counter)
+        counter += 1
+    return suggested_username
 
 
 

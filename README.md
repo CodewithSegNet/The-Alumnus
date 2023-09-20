@@ -8,7 +8,7 @@ The Alumnus Project is a web application designed to foster connections and faci
 
 - **Web Application Development** : *Learn to design and develop a web application using Flask, a popular Python web framework. Gain proficiency in handling HTTP requests and responses, implementing RESTful routes, and creating a user-friendly interface.*
 
-- **Database Management** : *Acquire skills in managing a MySQL database, including establishing connections SqlAlchemy, executing SQL queries, and ensuring data integrity. Explore techniques for efficient data storage and retrieval.*
+- **Database Management** : *Acquire skills in managing a Postgresql database, including establishing connections SqlAlchemy, executing SQL queries, and ensuring data integrity. Explore techniques for efficient data storage and retrieval.*
 
 - **Frontend Development** : *Enhance frontend development skills by creating user interfaces for user registration, login, and profile management. Utilize JSON for data exchange between the frontend and backend.*
 

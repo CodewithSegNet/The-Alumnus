@@ -1,4 +1,7 @@
 __pycache__/
 .env
 database
-# add some soon
+config_setup.py
+runtime.txt
+myvenv/
+*.pyc

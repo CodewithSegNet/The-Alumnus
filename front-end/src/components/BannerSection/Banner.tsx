@@ -9,9 +9,7 @@ import {
   rem,
 } from "@mantine/core";
 import { Button } from "@nextui-org/react";
-import Autoplay from "embla-carousel-autoplay";
 import { useRouter } from "next/router";
-import { useRef } from "react";
 
 const useStyles = createStyles((theme) => ({
   price: {
@@ -60,7 +58,7 @@ const images = [
 
 export function BannerSlider() {
   const { classes } = useStyles();
-  const autoplay = useRef(Autoplay({ delay: 2000 }));
+
   const router = useRouter();
 
   const slides = images.map((image) => (
@@ -113,9 +111,6 @@ export function BannerSlider() {
           mx="auto"
           withIndicators
           height={600}
-          plugins={[autoplay.current as any]}
-          onMouseEnter={autoplay.current.stop}
-          onMouseLeave={autoplay.current.reset}
           loop
           classNames={{
             root: classes.carousel,

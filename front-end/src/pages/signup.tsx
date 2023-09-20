@@ -7,9 +7,13 @@ import { TEInput, TERipple } from "tw-elements-react";
 import logo from "./../assets/Home/logo.png";
 
 function Register() {
-  const [username, setUsername] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [middle_name, setMiddleName] = useState("");
+  const [grad_Year, setGradYear] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [confirm_password, setConfirmPassword] = useState("");
   const router = useRouter();
   return (
     <BaseLayout>
@@ -36,19 +40,44 @@ function Register() {
 
                       <form>
                         <p className="mb-4">Please login to your account</p>
-                        {/* <!--Username input--> */}
+                        {/* <!--firstName input--> */}
                         <TEInput
                           type="text"
-                          label="Username"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
+                          label="firstName"
+                          value={first_name}
+                          onChange={(e) => setFirstName(e.target.value)}
                           className="mb-4"
                         ></TEInput>
+                        {/* <!--middleName input--> */}
                         <TEInput
                           type="text"
-                          label="Email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          label="middleName"
+                          value={middle_name}
+                          onChange={(e) => setMiddleName(e.target.value)}
+                          className="mb-4"
+                        ></TEInput>
+                        {/* <!--lastName input--> */}
+                        <TEInput
+                          type="text"
+                          label="lastName"
+                          value={last_name}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="mb-4"
+                        ></TEInput>
+                        {/* <!--grad_year input--> */}
+                        <TEInput
+                          type="text"
+                          label="grad year"
+                          value={grad_Year}
+                          onChange={(e) => setGradYear(e.target.value)}
+                          className="mb-4"
+                        ></TEInput>
+                        {/* <!--username input--> */}
+                        <TEInput
+                          type="text"
+                          label="username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                           className="mb-4"
                         ></TEInput>
 
@@ -58,6 +87,14 @@ function Register() {
                           label="Password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
+                          className="mb-4"
+                        ></TEInput>
+                        {/* <!--Password input--> */}
+                        <TEInput
+                          type="password"
+                          label="Password"
+                          value={confirm_password}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
                           className="mb-4"
                         ></TEInput>
 
@@ -104,8 +141,7 @@ function Register() {
                   <div
                     className="lg:flex items-center rounded-b-lg lg:w-6/12  lg:rounded-r-lg lg:rounded-bl-none"
                     style={{
-                      background:
-                        "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                      background: "#03045E",
                     }}
                   >
                     <div className="px-4 py-6 text-white md:mx-6 md:p-12">

@@ -1,15 +1,36 @@
 "use client";
 import BaseLayout from "@/components/BaseLayout";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { TEInput, TERipple } from "tw-elements-react";
 import logo from "./../assets/Home/logo.png";
+import { loginApi } from "./api/login";
 
 const Login = () => {
+  const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
+  console.log("🚀 ~ file: login.tsx:13 ~ Login ~ isError:", isError)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    // Replace 'your_username' and 'your_password' with actual values
+    const formData = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      await mutate(formData);
+      // router.push("/event"); // Redirect to the home page upon successful login
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <BaseLayout>
       <section className="h-full overflow-y-auto mt-14">
@@ -57,7 +78,7 @@ const Login = () => {
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <TERipple rippleColor="light" className="w-full">
                             <button
-                              onClick={() => {}}
+                              onClick={handleSubmit}
                               className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                               type="button"
                               style={{
@@ -96,8 +117,7 @@ const Login = () => {
                   <div
                     className="lg:flex items-center rounded-b-lg lg:w-6/12  lg:rounded-r-lg lg:rounded-bl-none"
                     style={{
-                      background:
-                        "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                      background: "#03045E",
                     }}
                   >
                     <div className="px-4 py-6 text-white md:mx-6 md:p-12">

@@ -1,9 +1,9 @@
 "use client";
 import BaseLayout from "@/components/BaseLayout";
+import { PasswordInput, TextInput } from "@mantine/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { TEInput, TERipple } from "tw-elements-react";
 import logo from "./../assets/Home/logo.png";
 
 function Register() {
@@ -41,78 +41,102 @@ function Register() {
                       <form>
                         <p className="mb-4">Please login to your account</p>
                         {/* <!--firstName input--> */}
-                        <TEInput
-                          type="text"
-                          label="firstName"
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="First Name"
                           value={first_name}
-                          onChange={(e) => setFirstName(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setFirstName(event.currentTarget.value)
+                          }
+                          label="First Name"
+                        />
+
                         {/* <!--middleName input--> */}
-                        <TEInput
-                          type="text"
-                          label="middleName"
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="Middle Name"
                           value={middle_name}
-                          onChange={(e) => setMiddleName(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setMiddleName(event.currentTarget.value)
+                          }
+                          label="Middle Name"
+                        />
+
                         {/* <!--lastName input--> */}
-                        <TEInput
-                          type="text"
-                          label="lastName"
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="Last Name"
                           value={last_name}
-                          onChange={(e) => setLastName(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setLastName(event.currentTarget.value)
+                          }
+                          label="Last Name"
+                        />
+
                         {/* <!--grad_year input--> */}
-                        <TEInput
-                          type="text"
-                          label="grad year"
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="Graduation Year"
                           value={grad_Year}
-                          onChange={(e) => setGradYear(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setGradYear(event.currentTarget.value)
+                          }
+                          label="Graduation Year"
+                        />
+
                         {/* <!--username input--> */}
-                        <TEInput
-                          type="text"
-                          label="username"
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="Username"
                           value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setUsername(event.currentTarget.value)
+                          }
+                          label="Username"
+                        />
 
                         {/* <!--Password input--> */}
-                        <TEInput
-                          type="password"
-                          label="Password"
+                        <PasswordInput
+                          required
+                          className="mb-2"
+                          placeholder="Password"
                           value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
-                        {/* <!--Password input--> */}
-                        <TEInput
-                          type="password"
+                          onChange={(event) =>
+                            setPassword(event.currentTarget.value)
+                          }
                           label="Password"
+                        />
+
+                        {/* <!--Password input--> */}
+                        <PasswordInput
+                          required
+                          className="mb-2"
+                          placeholder="Confirm Password"
                           value={confirm_password}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
+                          onChange={(event) =>
+                            setConfirmPassword(event.currentTarget.value)
+                          }
+                          label="Confirm Password"
+                        />
 
                         {/* <!--Submit button--> */}
                         <div className="mb-12 pb-1 pt-1 text-center">
-                          <TERipple rippleColor="light" className="w-full">
-                            <button
-                              onClick={() => {}}
-                              className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                              type="button"
-                              style={{
-                                background:
-                                  "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                              }}
-                            >
-                              Sign Up
-                            </button>
-                          </TERipple>
+                          <button
+                            onClick={() => {}}
+                            className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                            type="button"
+                            style={{
+                              background:
+                                "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                            }}
+                          >
+                            Sign Up
+                          </button>
 
                           {/* <!--Forgot password link--> */}
                           <a href="#!">Forgot password?</a>
@@ -121,17 +145,16 @@ function Register() {
                         {/* <!--Register button--> */}
                         <div className="flex items-center justify-between pb-6">
                           <p className="mb-0 mr-2">Already have an account?</p>
-                          <TERipple rippleColor="light">
-                            <button
-                              onClick={() => {
-                                router.push({ pathname: "/login" });
-                              }}
-                              type="button"
-                              className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                            >
-                              login
-                            </button>
-                          </TERipple>
+
+                          <button
+                            onClick={() => {
+                              router.push({ pathname: "/login" });
+                            }}
+                            type="button"
+                            className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                          >
+                            login
+                          </button>
                         </div>
                       </form>
                     </div>

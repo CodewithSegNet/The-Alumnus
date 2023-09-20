@@ -1,16 +1,16 @@
 "use client";
 import BaseLayout from "@/components/BaseLayout";
+import { PasswordInput, TextInput } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { TEInput, TERipple } from "tw-elements-react";
 import logo from "./../assets/Home/logo.png";
 import { loginApi } from "./api/login";
 
 const Login = () => {
   const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
-  console.log("🚀 ~ file: login.tsx:13 ~ Login ~ isError:", isError)
+  console.log("🚀 ~ file: login.tsx:13 ~ Login ~ isError:", isError);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -57,38 +57,42 @@ const Login = () => {
                       <form>
                         <p className="mb-4">Please login to your account</p>
                         {/* <!--Username input--> */}
-                        <TEInput
-                          type="text"
-                          label="Username"
+                        <TextInput
+                          required
+                          className="mb-4"
+                          placeholder="Your username"
                           value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          className="mb-4"
-                        ></TEInput>
-
+                          onChange={(event) =>
+                            setUsername(event.currentTarget.value)
+                          }
+                          label="Username"
+                        />
                         {/* <!--Password input--> */}
-                        <TEInput
-                          type="password"
+                        <PasswordInput
                           label="Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          required
                           className="mb-4"
-                        ></TEInput>
+                          placeholder="Your password"
+                          mt="md"
+                          value={password}
+                          onChange={(event) =>
+                            setPassword(event.currentTarget.value)
+                          }
+                        />
 
                         {/* <!--Submit button--> */}
                         <div className="mb-12 pb-1 pt-1 text-center">
-                          <TERipple rippleColor="light" className="w-full">
-                            <button
-                              onClick={handleSubmit}
-                              className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                              type="button"
-                              style={{
-                                background:
-                                  "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                              }}
-                            >
-                              Log in
-                            </button>
-                          </TERipple>
+                          <button
+                            onClick={handleSubmit}
+                            className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                            type="button"
+                            style={{
+                              background:
+                                "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                            }}
+                          >
+                            Log in
+                          </button>
 
                           {/* <!--Forgot password link--> */}
                           <a href="#!">Forgot password?</a>
@@ -97,17 +101,16 @@ const Login = () => {
                         {/* <!--Register button--> */}
                         <div className="flex items-center justify-between pb-6">
                           <p className="mb-0 mr-2">Don't have an account?</p>
-                          <TERipple rippleColor="light">
-                            <button
-                              onClick={() => {
-                                router.push({ pathname: "/signup" });
-                              }}
-                              type="button"
-                              className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                            >
-                              Register
-                            </button>
-                          </TERipple>
+
+                          <button
+                            onClick={() => {
+                              router.push({ pathname: "/signup" });
+                            }}
+                            type="button"
+                            className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                          >
+                            Register
+                          </button>
                         </div>
                       </form>
                     </div>

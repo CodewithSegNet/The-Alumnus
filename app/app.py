@@ -3,6 +3,7 @@ from flask import Flask
 from app.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
+from flask_cors import CORS
 
 # create a slqalchemy object
 db = SQLAlchemy()
@@ -24,6 +25,9 @@ def create_app():
     # Register the user Blueprint
     from app.controller.user_controller import user_bp
     app.register_blueprint(user_bp, url_prefix='/api')
+
+    # Configure CORS to allow requests from any origin
+    CORS(app)
 
     # create the datebase tables
     with app.app_context():

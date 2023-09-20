@@ -4,4 +4,4 @@
 source myvenv/bin/activate
 
 # run gunicorn
-gunicortn 'app.app:create_app()'
+gunicorn 'app.app:create_app()'

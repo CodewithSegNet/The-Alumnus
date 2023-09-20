@@ -26,7 +26,7 @@ The Alumnus Project is a web application designed to foster connections and faci
 - Session Management
 - Next js(react) front end framework 
 - Tailwind css ( styling)
-- React query (api query)
+* React query (api query)
 
 
 # Collaborators:

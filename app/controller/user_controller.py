@@ -2,17 +2,14 @@
 
 # Import Modules
 from flask import Blueprint, request, jsonify, session, redirect, url_for
-from app.app import create_app
+from app.app import create_app, db
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from app.model.user_model import UserProfile
 from sqlalchemy import or_
-import pymysql
 
 user_bp = Blueprint('user', __name__)
 app = create_app()
-db = app.db
-
 
 # Route for registrating a new user
 @user_bp.route('/register', methods=['POST'])

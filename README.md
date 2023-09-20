@@ -23,7 +23,7 @@ The Alumnus Project is a web application designed to foster connections and faci
 - Python
 - Figma
 - Mysql(sqlAlchemy)
-- JWT Authentication
+- Session Management
 - Next js(react) front end framework 
 - Tailwind css ( styling)
 - React query (api query)

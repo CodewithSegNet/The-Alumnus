@@ -1,7 +1,5 @@
 # The Alumnus
 
-## Project Description:
-
 The Alumnus Project is a web application designed to foster connections and facilitate engagement among the alumni community of Lorem School. This initiative aims to provide a robust platform that grants alumni access to a wide array of school-related activities and updates, thus enhancing their sense of belonging and involvement.
 
 ## Learning Objectives:

@@ -6,5 +6,9 @@ Werkzeug
 python-dotenv
 python-decouple
 psycopg2-binary
+<<<<<<< HEAD
 Flask-cors
+=======
+flask-cors
+>>>>>>> 063de7fac7237096b97b2b61f82e854e49af146d
 gunicorn

@@ -60,10 +60,15 @@ def login():
     user = UserProfile.query.filter_by(username=username, password=password).first()
 
     if user:
+        # Use the alumni_id as the unique identifier
+        alumni_id = user.alumni_id
+
         # Store login status in the session
         session['logged_in'] = True
         session['username'] = user.username
-        return jsonify({"message": "Login Successful!"}), 200
+        session['alumni_id'] = user.alumni_id
+        success_message = 'Login Successful, {}'.format(user.username)
+        return jsonify({"message": success_message)}), 200
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 
@@ -97,7 +102,7 @@ def delete_user(username):
 
 @user_bp.route('/users/<int:grad_year>', methods=['GET'])
 @login_required
-def get_user_by_class():
+def get_user_by_class(grad_year):
     try:
         users =  UserProfile.query.filter(grad_year=grad_year).all()
         
@@ -113,13 +118,13 @@ def get_user_by_class():
 
 @user_bp.route('/users/<string:name>', methods=['GET'])
 @login_required
-def get_user_by_name():
+def get_user_by_name(name):
     try:
         users = UserProfile.query.filter(
                 or_(
-                    first_name == name,
-                    last_name == name,
-                    middle_name == name
+                    UserProfile.first_name == name,
+                    UserProfile.last_name == name,
+                    UserProfile.middle_name == name
                 )
             ).all()
 

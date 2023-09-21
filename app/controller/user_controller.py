@@ -71,7 +71,7 @@ def login():
         session['success_message'] = success_message
 
 
-        return redirect(url_for('protected'))
+        return redirect(url_for('user.protected_route'))
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 
@@ -86,7 +86,7 @@ def login_required(f):
     return decorated_function
 
 # Protected route 
-@user_bp.route('/protected')
+@user_bp.route('/protected_route', methods=['GET:'])
 @login_required
 def protected_route():
     '''route for only authenticated users'''

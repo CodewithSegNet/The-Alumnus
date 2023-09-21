@@ -86,7 +86,7 @@ def login_required(f):
     return decorated_function
 
 # Protected route 
-@user_bp.route('/protected_route', methods=['GET:'])
+@user_bp.route('/api/protected_route', methods=['GET'])
 @login_required
 def protected_route():
     '''route for only authenticated users'''

@@ -68,7 +68,7 @@ def login():
         session['username'] = user.username
         session['alumni_id'] = user.alumni_id
         success_message = 'Login Successful, {}'.format(user.username)
-        return jsonify({"message": success_message)}), 200
+        return jsonify({"message": success_message}), 200
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 

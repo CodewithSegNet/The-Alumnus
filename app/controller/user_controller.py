@@ -71,7 +71,7 @@ def login():
         session['success_message'] = success_message
 
 
-        return redirect(url_for('user.protected_route'))
+        return jsonify({"message": success_message}), 200
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 
@@ -84,20 +84,6 @@ def login_required(f):
         return f()
 
     return decorated_function
-
-# Protected route 
-@user_bp.route('/api/protected_route', methods=['GET'])
-@login_required
-def protected_route():
-    '''route for only authenticated users'''
-    success_message = session.get('success_message')
-
-    if success_message:
-        return jsonify({"message": "Access Granted", "success_message": success_message}), 200
-    else:
-        return jsonify({"message": "Access Denied"}), 403
-
-
 
 # Route for deleting user data by username
 @user_bp.route('/users/<username>', methods=['DELETE'])

@@ -82,6 +82,12 @@ def login_required(f):
 
     return decorated_function
 
+# Protected route 
+@user_bp.route('/protected')
+@login_required
+def protected_route():
+    '''route for only authenticated users'''
+    return "protected route, only logged-in users can access it."
 
 # Route for deleting user data by username
 @user_bp.route('/users/<username>', methods=['DELETE'])

@@ -67,8 +67,11 @@ def login():
         session['logged_in'] = True
         session['username'] = user.username
         session['alumni_id'] = user.alumni_id
-        success_message = 'Login Successful, {}'.format(user.username)
-        return jsonify({"message": success_message}), 200
+        success_message = 'Login Successful, {} (Alumni ID: {})'.format(user.username, alumni_id)
+        session['success_message'] = success_message
+
+
+        return redirect(url_for('protected'))
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 
@@ -87,7 +90,14 @@ def login_required(f):
 @login_required
 def protected_route():
     '''route for only authenticated users'''
-    return "protected route, only logged-in users can access it."
+    success_message = session.get('success_message')
+
+    if success_message:
+        return jsonify({"message": "Access Granted", "success_message": success_message}), 200
+    else:
+        return jsonify({"message": "Access Denied"}), 403
+
+
 
 # Route for deleting user data by username
 @user_bp.route('/users/<username>', methods=['DELETE'])

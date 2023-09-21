@@ -120,7 +120,7 @@ def get_user_by_class(grad_year):
         return jsonify({'error': str(e)}), 500
 
 
-@user_bp.route('/users/<string:name>', methods=['GET'])
+@user_bp.route('/users/<string:name>/', methods=['GET'])
 @login_required
 def get_user_by_name(name):
     try:

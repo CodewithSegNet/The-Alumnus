@@ -32,7 +32,7 @@ def register():
         # Check if the username is already taken
         if UserProfile.query.filter_by(username=new_user.username).first():
             suggested_username = suggest_username(new_user.username)
-            return jsonify({"message": "Username already taken, Try {} instead".format(suggested_username)})
+            return jsonify({"message": "Username already taken, Try {} instead".format(suggested_username)}), 404
     
 
         # Add the new user to the database
@@ -41,6 +41,8 @@ def register():
 
         return jsonify({"message": "User registration successful!"}), 201
         return redirect(url_for('login'))
+
+
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -67,11 +69,11 @@ def login():
         session['logged_in'] = True
         session['username'] = user.username
         session['alumni_id'] = user.alumni_id
-        success_message = 'Login Successful, {} (Alumni ID: {})'.format(user.username, alumni_id)
+        success_message = 'Login Successful, {}'.format(user.username)
         session['success_message'] = success_message
 
 
-        return jsonify({"message": success_message}), 200
+        return jsonify({"message": success_message, "alumni_id": alumni_id}), 200
     else:
         return jsonify({"message": "Login failed. Invalid username or password"})
 
@@ -138,7 +140,12 @@ def get_user_by_name(name):
                 'middle_name': user.middle_name
             })
 
-        return jsonify(user_data), 200
+        if users:
+            user_data = [{'first_name': user.first_name, 'middle_name': user.middle_name, 'last_name': user.last_name} for user in users]
+            return jsonify(user_data), 200
+        else:
+            return jsonify({"message": 'Alumni Not Found'}), 404
+
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

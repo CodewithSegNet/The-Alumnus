@@ -75,7 +75,7 @@ def login():
 
         return jsonify({"message": success_message, "alumni_id": alumni_id}), 200
     else:
-        return jsonify({"message": "Login failed. Invalid username or password"})
+        return jsonify({"message": "Login failed. Invalid username or password"}), 400
 
 
 def login_required(f):

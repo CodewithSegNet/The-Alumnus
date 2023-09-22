@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import logo from "./../assets/Home/logo.png";
 import { loginApi } from "./api/login";
 
@@ -33,11 +34,24 @@ const Login = () => {
 
     try {
       await mutate(formData);
-      if (isSuccess) {
-        router.push("/events"); // Redirect to the '/event' page
-      }
+      toast.success(`Login Successful, ${username}`, {
+        position: "top-right",
+        autoClose: 2000, // in milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } catch (error) {
       console.error(error);
+      toast.error(`Something went wrong`, {
+        position: "top-right",
+        autoClose: 3000, // in milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
   return (

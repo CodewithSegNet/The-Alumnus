@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import logo from "./../assets/Home/logo.png";
 import { signUpApi } from "./api/signup";
+import { toast } from "react-toastify";
+
 
 function Register() {
   const { mutate, isLoading, isError, isSuccess } = useMutation(signUpApi);
@@ -42,9 +44,24 @@ function Register() {
 
     try {
       await mutate(formData);
-      // router.push("/login"); //Redirect to the home page upon successful login
+      toast.success(`Signup Successful, ${username}`, {
+        position: "top-right",
+        autoClose: 2000, // in milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } catch (error) {
       console.error(error);
+      toast.error(`Something went wrong`, {
+        position: "top-right",
+        autoClose: 3000, // in milliseconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      })
     }
   };
   return (

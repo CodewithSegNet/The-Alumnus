@@ -1,12 +1,16 @@
 "use client";
+import AlertComponent from "@/components/Alert";
 import BaseLayout from "@/components/BaseLayout";
 import { PasswordInput, TextInput } from "@mantine/core";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "./../assets/Home/logo.png";
+import { signUpApi } from "./api/signup";
 
 function Register() {
+  const { mutate, isLoading, isError, isSuccess } = useMutation(signUpApi);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [middle_name, setMiddleName] = useState("");
@@ -15,6 +19,34 @@ function Register() {
   const [username, setUsername] = useState("");
   const [confirm_password, setConfirmPassword] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push("/login"); // Redirect to the '/events' page
+    }
+  }, [isSuccess]);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    // Replace 'your_username' and 'your_password' with actual values
+    const formData = {
+      first_name: first_name,
+      middle_name: middle_name,
+      last_name: last_name,
+      grad_year: parseInt(grad_Year),
+      username: username,
+      password: password,
+      confirm_password: confirm_password,
+    };
+
+    try {
+      await mutate(formData);
+      // router.push("/login"); //Redirect to the home page upon successful login
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <BaseLayout>
       <section className="h-full overflow-y-auto mt-14">
@@ -37,7 +69,22 @@ function Register() {
                           Alumni
                         </h4>
                       </div>
-
+                      <>
+                        {isSuccess ? (
+                          <>
+                            <AlertComponent
+                              title={`Signup Successful, ${username}`}
+                              color="green"
+                            />
+                          </>
+                        ) : null}
+                        {isError ? (
+                          <AlertComponent
+                            title={`Something went wrong`}
+                            color="red"
+                          />
+                        ) : null}
+                      </>
                       <form>
                         <p className="mb-4">Please login to your account</p>
                         {/* <!--firstName input--> */}
@@ -127,15 +174,17 @@ function Register() {
                         {/* <!--Submit button--> */}
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <button
-                            onClick={() => {}}
+                            disabled={isLoading ? true : false}
+                            onClick={handleSubmit}
                             className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                             type="button"
                             style={{
-                              background:
-                                "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                              background: isLoading
+                                ? "gray"
+                                : "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
                             }}
                           >
-                            Sign Up
+                            {isLoading ? "Loading..." : "Sign Up"}
                           </button>
 
                           {/* <!--Forgot password link--> */}

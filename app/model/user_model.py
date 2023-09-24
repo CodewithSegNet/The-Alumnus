@@ -22,6 +22,6 @@ class UserProfile(db.Model):
     username = db.Column(db.String(15), nullable=False)
     password = db.Column(db.String(15), nullable=False)
     confirm_password = db.Column(db.String(15), nullable=False)
-    created_date = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    updated_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 

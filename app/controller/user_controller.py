@@ -7,8 +7,13 @@ from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from app.model.user_model import UserProfile
 from sqlalchemy import or_
+import datetime
 
+
+# create a Blueprint for user-related routes
 user_bp = Blueprint('user', __name__)
+
+# Create a Flask application
 app = create_app()
 
 # Route for registrating a new user
@@ -27,6 +32,8 @@ def register():
             username=data['username'],
             password=data['password'],
             confirm_password=data['confirm_password']
+            created_date=current_time,
+            updated_date=current_time
         )
 
         # Check if the username is already taken
@@ -88,8 +95,11 @@ def login_required(f):
     return decorated_function
 
 # Route for deleting user data by username
-@user_bp.route('/users/<username>', methods=['DELETE'])
+@user_bp.route('/users/delete/<username>', methods=['DELETE'])
 def delete_user(username):
+    ''' Route that handle deleting of user
+        by username
+    '''
     try:
         user = UserProfile.query.filter_by(username=username).first()
 
@@ -97,6 +107,25 @@ def delete_user(username):
             db.session.delete(user)
             db.session.commit()
             return jsonify({"message": "User Deleted succussfully!"}), 200
+        else:
+            return jsonify({"message": "User Not Found"}), 404
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+# Route for deleting user by Alumni_ID
+@user_bp.route('/users/delete/<int:alumni_id>', methods=['DELETE'])
+def delete_user_by_id(alumni_id):
+    ''' Route that handles deleting of users
+        by ID
+    '''
+    try:
+        user = UserProfile.query.get(alumni_id)
+
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return jsonify({"message": "User Deleted successfully!"}), 200
         else:
             return jsonify({"message": "User Not Found"}), 404
     except SQLAlchemyError as e:

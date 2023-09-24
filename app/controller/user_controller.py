@@ -32,8 +32,8 @@ def register():
             username=data['username'],
             password=data['password'],
             confirm_password=data['confirm_password'],
-            created_date=datetime.utcnow(),
-            updated_date=datetime.utcnow()
+            created_date=datetime.datetime.utcnow(),
+            updated_date=datetime.datetime.utcnow()
         )
 
         # Check if the username is already taken

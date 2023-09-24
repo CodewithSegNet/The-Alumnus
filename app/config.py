@@ -10,7 +10,7 @@ class Config:
 
     # Disable track modifications to avoid warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-"""
+
 class DevelopmentConfig(Config):
     '''Development configuration class
     '''
@@ -23,7 +23,7 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://segun@localhost/test_db'
     DEBUG = False
-"""
+
 class ProductionConfig(Config):
     '''Production configuration class
     '''

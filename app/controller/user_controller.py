@@ -31,7 +31,7 @@ def register():
             grad_year=data['grad_year'],
             username=data['username'],
             password=data['password'],
-            confirm_password=data['confirm_password']
+            confirm_password=data['confirm_password'],
             created_date=datetime.utcnow(),
             updated_date=datetime.utcnow()
         )

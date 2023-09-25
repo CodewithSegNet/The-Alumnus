@@ -133,6 +133,32 @@ def delete_user_by_id(alumni_id):
         return jsonify({"error": str(e)}), 500
 
 
+# Route for getting user by Alumni_ID
+@user_bp.route('/users/<int:alumi_id>', methods=['GET'])
+def user_by_id(alumni_id):
+    ''' Route that handles getting users by 
+        alumni_id
+    '''
+    try:
+        user = UserProfile.query.get(alumni_id)
+
+        if user:
+            user_data = {
+                    'alumni_id': user.alumni_id,
+                    'first_name': user.first_name,
+                    'middle_name': user.middle_name,
+                    'last_name': user.last_name,
+                    'grad_year': user.grad_year,
+                    'username': user.username
+                    }
+            
+            return jsonify({'user': user_data}), 200
+        else:
+            return jsonify({'message': 'User Not Found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 @user_bp.route('/users/search', methods=['GET'])
 @login_required

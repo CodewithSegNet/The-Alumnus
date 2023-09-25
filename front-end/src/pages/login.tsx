@@ -12,6 +12,8 @@ import { loginApi } from "./api/login";
 
 const Login = () => {
   const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
+  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isSuccess:", isSuccess);
+  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isError:", isError);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,24 +36,18 @@ const Login = () => {
 
     try {
       await mutate(formData);
-      toast.success(`Login Successful, ${username}`, {
-        position: "top-right",
-        autoClose: 2000, // in milliseconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      if (isSuccess === true) {
+        toast.success(`Login Successful, ${username}`, {
+          position: "top-right",
+          autoClose: 2000, // in milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     } catch (error) {
       console.error(error);
-      toast.error(`Something went wrong`, {
-        position: "top-right",
-        autoClose: 3000, // in milliseconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
     }
   };
   return (

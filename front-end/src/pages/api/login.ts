@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const loginApi = async (formData: any) => {
   try {
@@ -12,6 +13,13 @@ export const loginApi = async (formData: any) => {
         },
       }
     );
+
+    // Assuming the response contains an 'id' field
+    const { alumni_id } = response.data;
+
+    // Save the 'id' in a cookie
+    Cookies.set("userId", alumni_id, { expires: 7 }); // Set the cookie to expire in 7 days
+
     return response.data;
   } catch (error) {
     throw new Error("Login failed");

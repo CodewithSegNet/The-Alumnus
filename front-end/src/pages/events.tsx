@@ -75,8 +75,8 @@ const Events = () => {
                   </h2>
 
                   <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
-                    {data?.user?.first_name} {data?.user?.last_name}{" "}
-                    {data?.user?.username}
+                    {data?.user?.first_name} {data?.user?.middle_name}
+                    {data?.user?.last_name}{" "}
                   </h1>
                   <div className="flex mb-4">
                     <a className="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">

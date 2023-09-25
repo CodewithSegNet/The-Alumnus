@@ -157,9 +157,9 @@ def get_users():
 
         if users:
             user_data = [{'username': user.username, 'grad_year': user.grad_year} for user in users]
-            return jsonify({user_data}), 200
+            return jsonify({'users': user_data}), 200
         else:
-            return jsonify({'No Alumni Found'}), 404
+            return jsonify({'message': 'No Alumni Found'}), 404
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

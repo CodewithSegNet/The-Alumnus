@@ -136,12 +136,23 @@ def delete_user_by_id(alumni_id):
 
 @user_bp.route('/users/search', methods=['GET'])
 @login_required
-def get_user():
+def get_users():
+
+    user_data = {
+        'name' : request.args.get('name'),
+        'grad_year' : request.args.get('grad_year')
+    }
+
+    filtered_users = []
+
+    for user in user_data:
+        if (name and user.get('name', '').lower() == name.lower()) or \
+                (grad_year and user.get('grad_year') == int(grad_year)):
+                    filtered_users.append(user)
+
+    return jsonify({'users': filtered_users}), 200
 
 
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 # function to suggest a unique username
 def suggest_username(username):

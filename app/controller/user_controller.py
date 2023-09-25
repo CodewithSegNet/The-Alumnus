@@ -137,23 +137,30 @@ def delete_user_by_id(alumni_id):
 @user_bp.route('/users/search', methods=['GET'])
 @login_required
 def get_users():
-
-    user_data = {
-        name = request.args.get('name'),
+    try:
+        name = request.args.get('name')
         grad_year = request.args.get('grad_year')
-    }
 
-    filtered_users = []
+        if grad_year is not None:
+            users = UserProfile.query.filter_by(grad_year=grad_year).all()
+        elif name is not None:
+            users = UserProfile.query.filter_by(or_(
+                UserProfile.first_name == name,
+                UserProfile.middle_name == name,
+                UserProfile.last_name == name
+                )
+            ).all()
+        else:
+            return jsonify({"message": "No criteria provided"}), 404
+        
+        if users:
+            user_data = [{'username': user.username, 'grad_year': user.grad_year} for user in users]
+            return jsonify({user_data}), 200
+        else:
+            return jsonify({'No Alumni Found'}, 404)
 
-    # logic to fetch all users from database based on parameter
-    all_users = 
-
-    for user in all_users:
-        if (name and user.get('name', '').lower() == name.lower()) or \
-                (grad_year and user.get('grad_year') == int(grad_year)):
-                    filtered_users.append(user)
-
-    return jsonify({'users': filtered_users}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 

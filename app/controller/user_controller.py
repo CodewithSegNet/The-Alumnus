@@ -156,7 +156,14 @@ def get_users():
         users = query.all()
 
         if users:
-            user_data = [{'username': user.username, 'grad_year': user.grad_year} for user in users]
+            user_data = []
+            for user in users:
+                full_name = "{} {} {}".format(user.first_name, user.middle_name, user.last_name)
+                user_data.append({
+                    'full_name': full_name,
+                    'username': user.username,
+                    'grad_year': user.grad_year
+                    })
             return jsonify({'users': user_data}), 200
         else:
             return jsonify({'message': 'No Alumni Found'}), 404

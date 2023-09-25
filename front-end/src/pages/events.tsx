@@ -24,6 +24,8 @@ const Events = () => {
       setIsDeleting(true);
       await deleteUser(userId);
       setIsDeleting(false);
+      router.push("/login");
+
       // Optionally, you can perform actions after successful deletion
       console.log(`User with ID ${userId} deleted successfully.`);
     } catch (error) {

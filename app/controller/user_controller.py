@@ -139,13 +139,16 @@ def delete_user_by_id(alumni_id):
 def get_users():
 
     user_data = {
-        'name' : request.args.get('name'),
-        'grad_year' : request.args.get('grad_year')
+        name = request.args.get('name'),
+        grad_year = request.args.get('grad_year')
     }
 
     filtered_users = []
 
-    for user in user_data:
+    # logic to fetch all users from database based on parameter
+    all_users = 
+
+    for user in all_users:
         if (name and user.get('name', '').lower() == name.lower()) or \
                 (grad_year and user.get('grad_year') == int(grad_year)):
                     filtered_users.append(user)

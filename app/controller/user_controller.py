@@ -141,18 +141,20 @@ def get_users():
         name = request.args.get('name')
         grad_year = request.args.get('grad_year')
 
+        query = UserProfile.query
+
         if grad_year is not None:
-            users = UserProfile.query.filter_by(grad_year=grad_year).all()
-        elif name is not None:
-            users = UserProfile.query.filter_by(or_(
+            query = query.filter(grad_year=grad_year).all()
+        if name is not None:
+            query = query.filter(or_(
                 UserProfile.first_name == name,
                 UserProfile.middle_name == name,
                 UserProfile.last_name == name
                 )
-            ).all()
-        else:
-            return jsonify({"message": "No criteria provided"}), 404
-        
+            )
+
+        users = query.all()
+
         if users:
             user_data = [{'username': user.username, 'grad_year': user.grad_year} for user in users]
             return jsonify({user_data}), 200

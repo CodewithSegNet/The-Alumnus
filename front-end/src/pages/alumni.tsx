@@ -19,21 +19,6 @@ const Events = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const handleDelete = async () => {
-    try {
-      setIsDeleting(true);
-      await deleteUser(userId);
-      setIsDeleting(false);
-      router.push("/login");
-
-      // Optionally, you can perform actions after successful deletion
-      console.log(`User with ID ${userId} deleted successfully.`);
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      setIsDeleting(false);
-    }
-  };
-
   function logout() {
     // Remove the user-related cookies (e.g., authentication token and user ID)
     Cookies.remove("token");
@@ -43,6 +28,22 @@ const Events = () => {
     router.push("/login");
     // Example: window.location.href = "/login";
   }
+
+  const handleDelete = async () => {
+    Cookies.remove("userId");
+    try {
+      setIsDeleting(true);
+      router.push("/login");
+      await deleteUser(userId);
+      setIsDeleting(false);
+
+      // Optionally, you can perform actions after successful deletion
+      console.log(`User with ID ${userId} deleted successfully.`);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      setIsDeleting(false);
+    }
+  };
 
   useEffect(() => {
     if (!userId) {

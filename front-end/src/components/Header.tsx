@@ -71,8 +71,8 @@ const links: HeaderSearchProps[] = [
     label: "About Us",
   },
   {
-    link: "/events",
-    label: "Events",
+    link: "/alumni",
+    label: "Alumni",
   },
   {
     link: "/login",

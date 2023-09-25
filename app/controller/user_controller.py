@@ -134,7 +134,7 @@ def delete_user_by_id(alumni_id):
 
 
 # Route for getting user by Alumni_ID
-@user_bp.route('/users/<int:alumi_id>', methods=['GET'])
+@user_bp.route('/users/<int:alumni_id>', methods=['GET'])
 def user_by_id(alumni_id):
     ''' Route that handles getting users by 
         alumni_id

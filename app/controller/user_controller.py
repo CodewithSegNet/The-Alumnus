@@ -133,47 +133,11 @@ def delete_user_by_id(alumni_id):
         return jsonify({"error": str(e)}), 500
 
 
-@user_bp.route('/users/<int:grad_year>', methods=['GET'])
+
+@user_bp.route('/users/search', methods=['GET'])
 @login_required
-def get_user_by_class(grad_year):
-    try:
-        users =  UserProfile.query.filter(grad_year=grad_year).all()
-        
-        if users:
-            data = [{'username': user.username, 'grad_year': user.grad_year} for user in users]
-            return jsonify({'users': data}), 200
-        else:
-            return jsonify({'message': 'No alumni found'}), 404
+def get_user():
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@user_bp.route('/users/<string:name>/', methods=['GET'])
-@login_required
-def get_user_by_name(name):
-    try:
-        users = UserProfile.query.filter(
-                or_(
-                    UserProfile.first_name == name,
-                    UserProfile.last_name == name,
-                    UserProfile.middle_name == name
-                )
-            ).all()
-
-        user_data = []
-        for user in users:
-            user_data.append({
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'middle_name': user.middle_name
-            })
-
-        if users:
-            user_data = [{'first_name': user.first_name, 'middle_name': user.middle_name, 'last_name': user.last_name} for user in users]
-            return jsonify(user_data), 200
-        else:
-            return jsonify({"message": 'Alumni Not Found'}), 404
 
 
     except Exception as e:

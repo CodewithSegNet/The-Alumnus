@@ -36,6 +36,13 @@ def register():
             updated_date=datetime.datetime.utcnow()
         )
 
+        # validate the email address
+        try:
+            new_user.validate_email(data['email'])
+        except ValueError as e:
+            return jsonify({'error': str(e)}), 400
+
+
         # Check if the username is already taken
         if UserProfile.query.filter_by(username=new_user.username).first():
             suggested_username = suggest_username(new_user.username)
@@ -93,25 +100,6 @@ def login_required(f):
         return f()
 
     return decorated_function
-
-# Route for deleting user data by username
-@user_bp.route('/users/delete/<username>', methods=['DELETE'])
-def delete_user(username):
-    ''' Route that handle deleting of user
-        by username
-    '''
-    try:
-        user = UserProfile.query.filter_by(username=username).first()
-
-        if user:
-            db.session.delete(user)
-            db.session.commit()
-            return jsonify({"message": "User Deleted succussfully!"}), 200
-        else:
-            return jsonify({"message": "User Not Found"}), 404
-    except SQLAlchemyError as e:
-        db.session.rollback()
-        return jsonify({"error": str(e)}), 500
 
 # Route for deleting user by Alumni_ID
 @user_bp.route('/users/delete/<int:alumni_id>', methods=['DELETE'])
@@ -197,6 +185,30 @@ def get_users():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+# Route that handles password reset by username
+@user_bp.route('/resetpwd/<string:username>', methods=['GET'])
+def reset_password(username):
+    ''' a route for reseting users password
+    '''
+    try:
+        new_password = request.args.get('new_password')
+
+        # Find the user with the provided username
+        user = UserProfile.query.filter_by(username=username).first()
+
+        if user:
+            # Update the user's password with new password
+            user.password = new_password
+            db.session.commit()
+
+            return jsonify({"message": "Password Reset Successful"}), 200
+        else:
+            return jsonify({"message": "Invalid username"}), 400
+    
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 
 # function to suggest a unique username

@@ -1,13 +1,9 @@
 import { Navbar, createStyles, getStylesRef, rem } from "@mantine/core";
 import {
-  IconBellRinging,
-  IconDatabaseImport,
   IconFingerprint,
   IconHome2,
-  IconKey,
   IconLogin,
   IconLogout,
-  IconReceipt2,
   IconUserCircle,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -85,10 +81,10 @@ const useStyles = createStyles((theme) => ({
 const data = [
   { link: "/", label: "Home", icon: IconHome2 },
   { link: "/about", label: "About Us", icon: IconHome2 },
-  { link: "/events", label: "Events", icon: IconFingerprint },
+  { link: "/alumni", label: "alumni", icon: IconFingerprint },
   { link: "/login", label: "Login", icon: IconLogin },
   { link: "/signup", label: "Signup", icon: IconUserCircle },
-  { link: "/", label: "Log out", icon: IconLogout},
+  { link: "/", label: "Log out", icon: IconLogout },
 ];
 
 export function SideNavBar() {
@@ -102,7 +98,6 @@ export function SideNavBar() {
       })}
       href={item.link}
       key={item.label}
-     
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>

@@ -32,6 +32,7 @@ def register():
             username=data['username'],
             password=data['password'],
             confirm_password=data['confirm_password'],
+            email=data['email'],
             created_date=datetime.datetime.utcnow(),
             updated_date=datetime.datetime.utcnow()
         )

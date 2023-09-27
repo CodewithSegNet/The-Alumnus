@@ -18,6 +18,7 @@ function Register() {
   const [grad_Year, setGradYear] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [confirm_password, setConfirmPassword] = useState("");
   const router = useRouter();
 
@@ -34,6 +35,7 @@ function Register() {
     const formData = {
       first_name: first_name,
       middle_name: middle_name,
+      email: email,
       last_name: last_name,
       grad_year: parseInt(grad_Year),
       username: username,
@@ -53,7 +55,7 @@ function Register() {
           pauseOnHover: true,
           draggable: true,
         });
-      } 
+      }
     } catch (error) {
       console.error(error);
     }
@@ -132,6 +134,17 @@ function Register() {
                             setLastName(event.currentTarget.value)
                           }
                           label="Last Name"
+                        />
+                        {/* <!-- email input--> */}
+                        <TextInput
+                          required
+                          className="mb-2"
+                          placeholder="Example@gmail.com"
+                          value={email}
+                          onChange={(event) =>
+                            setEmail(event.currentTarget.value)
+                          }
+                          label="Email"
                         />
 
                         {/* <!--grad_year input--> */}

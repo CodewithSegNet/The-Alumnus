@@ -75,8 +75,8 @@ const Events = () => {
                     Alumni Name
                   </h2>
 
-                  <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
-                    {data?.user?.first_name} {data?.user?.middle_name}
+                  <h1 className="text-gray-900 text-3xl title-font font-medium mb-4 capitalize">
+                    {data?.user?.first_name} {data?.user?.middle_name}{" "}
                     {data?.user?.last_name}{" "}
                   </h1>
                   <div className="flex mb-4">

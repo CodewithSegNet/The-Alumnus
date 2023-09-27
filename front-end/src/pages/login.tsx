@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push("/events"); // Redirect to the '/events' page
+      router.push("/alumni"); // Redirect to the '/events' page
     }
   }, [isSuccess]);
 

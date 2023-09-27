@@ -164,7 +164,7 @@ export function FooterComponent() {
       </Container>
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
-          © {currentYear} mantine.dev. All rights reserved.
+          © {currentYear} the-alumni. All rights reserved.
         </Text>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>

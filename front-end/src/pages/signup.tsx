@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import logo from "./../assets/Home/logo.png";
 import { signUpApi } from "./api/signup";
+import Link from "next/link";
 
 function Register() {
   const { mutate, isLoading, isError, isSuccess } = useMutation(signUpApi);
@@ -212,7 +213,7 @@ function Register() {
                           </button>
 
                           {/* <!--Forgot password link--> */}
-                          <a href="#!">Forgot password?</a>
+                          <Link href="/forgotpassword">Forgot password?</Link>
                         </div>
 
                         {/* <!--Register button--> */}

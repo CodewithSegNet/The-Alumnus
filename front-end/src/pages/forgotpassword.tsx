@@ -4,16 +4,16 @@ import BaseLayout from "@/components/BaseLayout";
 import { PasswordInput, TextInput } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import logo from "./../assets/Home/logo.png";
 import { loginApi } from "./api/login";
+import Link from "next/link";
 
 const Login = () => {
   const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
-  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isSuccess:", isSuccess);
+  console.log("🚀 ~ file: login.tsx:15 ~ Forgotpassword ~ isSuccess:", isSuccess);
   console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isError:", isError);
 
   const [username, setUsername] = useState("");
@@ -90,7 +90,7 @@ const Login = () => {
                         ) : null}
                       </>
                       <form>
-                        <p className="mb-4">Please login to your account</p>
+                        <p className="mb-4">Please reset your account</p>
                         {/* <!--Username input--> */}
                         <TextInput
                           required
@@ -131,8 +131,8 @@ const Login = () => {
                             {isLoading ? "Loading..." : "Log in"}
                           </button>
 
-                          {/* <!--Forgot password link--> */}
-                          <Link href="/forgotpassword">Forgot password?</Link>
+                          {/* <!--login link--> */}
+                          <Link href="/login">Login</Link>
                         </div>
 
                         {/* <!--Register button--> */}
@@ -162,7 +162,7 @@ const Login = () => {
                   >
                     <div className="px-4 py-6 text-white md:mx-6 md:p-12">
                       <h4 className="mb-6 text-xl font-semibold">
-                        Login To Alumni Account
+                        Reset Alumni Account
                       </h4>
                       <p className="text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipisicing

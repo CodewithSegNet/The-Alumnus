@@ -138,7 +138,8 @@ def user_by_id(alumni_id):
                     'middle_name': user.middle_name,
                     'last_name': user.last_name,
                     'grad_year': user.grad_year,
-                    'username': user.username
+                    'username': user.username,
+                    'email': user.email
                     }
             
             return jsonify({'user': user_data}), 200
@@ -188,7 +189,7 @@ def get_users():
 
 
 # Route that handles password reset by username
-@user_bp.route('/resetpwd/<string:username>', methods=['GET'])
+@user_bp.route('/resetpwd/<string:username>', methods=['PUT'])
 def reset_password(username):
     ''' a route for reseting users password
     '''

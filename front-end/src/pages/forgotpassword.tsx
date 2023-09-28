@@ -2,55 +2,48 @@
 import AlertComponent from "@/components/Alert";
 import BaseLayout from "@/components/BaseLayout";
 import { PasswordInput, TextInput } from "@mantine/core";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import logo from "./../assets/Home/logo.png";
-import { loginApi } from "./api/login";
-import Link from "next/link";
 
-const Login = () => {
-  const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
-  console.log("🚀 ~ file: login.tsx:15 ~ Forgotpassword ~ isSuccess:", isSuccess);
-  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isError:", isError);
-
+const ForgotPassword = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const queryClient = useQueryClient();
   const router = useRouter();
 
+  // Define a mutation function to reset the password
+  const resetPassword = useMutation(
+    async () => {
+      const response = await axios.put(
+        `https://the-alumnus-api.onrender.com/api/resetpwd/${username}?new_password=${password}`
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        // Invalidate relevant queries after a successful password reset
+        queryClient.invalidateQueries(["userData"]); // Change 'userData' to your query key
+        // You can invalidate more queries as needed
+      },
+    }
+  );
+
   useEffect(() => {
-    if (isSuccess) {
-      router.push("/alumni"); // Redirect to the '/events' page
+    if (resetPassword.isSuccess) {
+      router.push("/login"); // Redirect to the '/login' page
     }
-  }, [isSuccess]);
+  }, [resetPassword.isSuccess]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    // Replace 'your_username' and 'your_password' with actual values
-    const formData = {
-      username: username,
-      password: password,
-    };
-
-    try {
-      await mutate(formData);
-      if (isSuccess === true) {
-        toast.success(`Login Successful, ${username}`, {
-          position: "top-right",
-          autoClose: 2000, // in milliseconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    resetPassword.mutate(); // Trigger the mutation
   };
+
   return (
     <BaseLayout>
       <section className="h-full overflow-y-auto mt-14">
@@ -74,15 +67,15 @@ const Login = () => {
                         </h4>
                       </div>
                       <>
-                        {isSuccess ? (
+                        {resetPassword.isSuccess ? (
                           <>
                             <AlertComponent
-                              title={`Login Successful, ${username}`}
+                              title={`Password Reset Successful, ${username}`}
                               color="green"
                             />
                           </>
                         ) : null}
-                        {isError ? (
+                        {resetPassword.isError ? (
                           <AlertComponent
                             title={`Something went wrong`}
                             color="red"
@@ -118,17 +111,19 @@ const Login = () => {
                         {/* <!--Submit button--> */}
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <button
-                            disabled={isLoading ? true : false}
+                            // disabled={isLoading ? true : false}
                             onClick={handleSubmit}
                             className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                             type="button"
                             style={{
-                              background: isLoading
+                              background: resetPassword.isLoading
                                 ? "gray"
                                 : "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
                             }}
                           >
-                            {isLoading ? "Loading..." : "Log in"}
+                            {resetPassword.isLoading
+                              ? "Loading..."
+                              : "Reset Account"}
                           </button>
 
                           {/* <!--login link--> */}
@@ -183,4 +178,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

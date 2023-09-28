@@ -1,6 +1,4 @@
-import { Carousel } from "@mantine/carousel";
 import {
-  Card,
   Image,
   Overlay,
   Text,
@@ -10,6 +8,16 @@ import {
 } from "@mantine/core";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/router";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+// import required modules
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const useStyles = createStyles((theme) => ({
   price: {
@@ -61,66 +69,69 @@ export function BannerSlider() {
 
   const router = useRouter();
 
-  const slides = images.map((image) => (
-    <Carousel.Slide key={image}>
-      <div className="relative">
-        <Image
-          src={image}
-          height={600}
-          width="100%"
-          alt="banner"
-          radius="md"
-          withPlaceholder
-          placeholder={
-            <Text align="center">This image contained the meaning of life</Text>
-          }
-        />
-        <div className="absolute z-50 top-0 left-0 right-0 h-full flex flex-col justify-center lg:w-[80%] lg:px-[100px] px-[20px]">
-          <h3 className="text-white lg:text-[80px] text-[50px]">The Alumnus</h3>
-          <p className="lg:w-[70%]  text-white  text-[20px]">
-            Build fully functional accessible web applications faster than ever
-            – Mantine includes more than 120 customizable components and hooks
-            to cover you in any situation
-          </p>
-          <Button
-            radius="full"
-            onClick={() => {
-              router.push({ pathname: "/about" });
-            }}
-            style={{
-              backgroundColor: "#03045E",
-            }}
-            className="primaryColor text-white shadow-lg w-fit my-4 px-6 py-1"
-          >
-            READ MORE
-          </Button>
-        </div>
-        <Overlay
-          gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
-          opacity={1}
-          zIndex={0}
-        />
-      </div>
-    </Carousel.Slide>
-  ));
-
   return (
-    <Card radius="md" withBorder padding="xl">
-      <Card.Section>
-        <Carousel
-          mx="auto"
-          withIndicators
-          height={600}
-          loop
-          classNames={{
-            root: classes.carousel,
-            controls: classes.carouselControls,
-            indicator: classes.carouselIndicator,
-          }}
-        >
-          {slides}
-        </Carousel>
-      </Card.Section>
-    </Card>
+    <Swiper
+      spaceBetween={30}
+      centeredSlides={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={true}
+      modules={[Autoplay, Pagination, Navigation]}
+      className="mySwiper rounded-lg"
+    >
+      {images.map((image, index) => {
+        return (
+          <SwiperSlide key={index}>
+            <div className="relative rounded-md">
+              <Image
+                src={image}
+                height={630}
+                width="100%"
+                alt="banner"
+                radius="md"
+                withPlaceholder
+                placeholder={
+                  <Text align="center">
+                    This image contained the meaning of life
+                  </Text>
+                }
+              />
+              <div className="absolute z-50 top-0 left-0 right-0 h-full flex flex-col justify-center lg:w-[80%] lg:px-[100px] px-[20px]">
+                <h3 className="text-white lg:text-[80px] text-[50px]">
+                  The Alumnus
+                </h3>
+                <p className="lg:w-[70%]  text-white  text-[20px]">
+                  Build fully functional accessible web applications faster than
+                  ever – Mantine includes more than 120 customizable components
+                  and hooks to cover you in any situation
+                </p>
+                <Button
+                  radius="full"
+                  onClick={() => {
+                    router.push({ pathname: "/about" });
+                  }}
+                  style={{
+                    backgroundColor: "#03045E",
+                  }}
+                  className="primaryColor text-white shadow-lg w-fit my-4 px-6 py-1"
+                >
+                  READ MORE
+                </Button>
+              </div>
+              <Overlay
+                gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
+                opacity={1}
+                zIndex={0}
+              />
+            </div>
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
   );
 }

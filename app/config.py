@@ -11,19 +11,6 @@ class Config:
     # Disable track modifications to avoid warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-class DevelopmentConfig(Config):
-    '''Development configuration class
-    '''
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://segun@localhost/development_db'
-
-class TestingConfig(Config):
-    '''Testing configuration class
-    '''
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://segun@localhost/test_db'
-    DEBUG = False
-
 class ProductionConfig(Config):
     '''Production configuration class
     '''
@@ -32,8 +19,6 @@ class ProductionConfig(Config):
 
     # Mapping config names to their respective classes
 config_map = {
-    'development': DevelopmentConfig,
-    'testing': TestingConfig,
     'production': ProductionConfig,
 }
 

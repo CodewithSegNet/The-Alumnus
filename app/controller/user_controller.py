@@ -5,7 +5,7 @@ from flask import Blueprint, request, jsonify, session, redirect, url_for
 from app.app import create_app, db
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
-from app.model.user_model import UserProfile
+from app.model.user_model import UserProfile, UsersInfo
 from sqlalchemy import or_
 import datetime
 
@@ -21,6 +21,11 @@ app = create_app()
 def register():
     ''' A route that handles user registration
     '''
+
+    # create a new UserInfo record when a UserProfile is created
+    new_user_info = UsersInfo()
+
+
     try:
         data = request.json
         # Extract registration data from JSON
@@ -34,7 +39,7 @@ def register():
             confirm_password=data['confirm_password'],
             email=data['email'],
             created_date=datetime.datetime.utcnow(),
-            updated_date=datetime.datetime.utcnow()
+            updated_date=datetime.datetime.utcnow(),
         )
 
         # validate the email address
@@ -48,16 +53,20 @@ def register():
         if UserProfile.query.filter_by(username=new_user.username).first():
             suggested_username = suggest_username(new_user.username)
             return jsonify({"message": "Username already taken, Try {} instead".format(suggested_username)}), 404
-    
+
+        # Associate the new user with the UserInfo record
+        new_user.user_description = new_user_info
 
         # Add the new user to the database
+        db.session.add(new_user_info)
         db.session.add(new_user)
         db.session.commit()
-
+        
+        # return JSON response with success message and redirect user to login page
         return jsonify({"message": "User registration successful!"}), 201
         return redirect(url_for('login'))
 
-
+    # handles database issues(connection or constraint violation)
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -139,7 +148,8 @@ def user_by_id(alumni_id):
                     'last_name': user.last_name,
                     'grad_year': user.grad_year,
                     'username': user.username,
-                    'email': user.email
+                    'email': user.email,
+                    'user_profile': user.userDescript
                     }
             
             return jsonify({'user': user_data}), 200
@@ -178,7 +188,8 @@ def get_users():
                 user_data.append({
                     'full_name': full_name,
                     'username': user.username,
-                    'grad_year': user.grad_year
+                    'grad_year': user.grad_year,
+                    'user_profile': user.userDescript
                     })
             return jsonify({'users': user_data}), 200
         else:
@@ -209,6 +220,31 @@ def reset_password(username):
             return jsonify({"message": "Invalid username"}), 400
     
     except SQLAlchemyError as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+# Route for updating user info
+@user_bp.route('/user/update/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    ''' route that handles updating user description
+    '''
+    try:
+        data = request.json
+
+        # Find the user_info record to update
+        user_info = UsersInfo.query.get(user_id)
+
+        if user_info:
+            # Update the user_fo record
+            user_info.userDescript = data.get('userDescript')
+            db.session.commit()
+
+            return jsonify({"message": "User info update successfully!"}), 200
+        else:
+            return jsonify({"message": "User info not found"}), 404
+
+    except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 

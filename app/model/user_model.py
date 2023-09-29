@@ -21,8 +21,8 @@ class UsersInfo(db.Model):
 
     # Column for user description
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-
-
+    userDescript = db.Column(db.String(300), nullable=True)
+    
 class UserProfile(db.Model):
     ''' A class that defines the userProfile
     '''
@@ -42,9 +42,6 @@ class UserProfile(db.Model):
     updated_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
     
-    # Add new column for user Description
-    userDescript = db.Column(db.String(300), nullable=True)
-
     # foreign key relationship
     user_id = db.Column(db.Integer, db.ForeignKey('users_info.user_id'), nullable=False, autoincrement=True)
 
@@ -53,7 +50,6 @@ class UserProfile(db.Model):
 
     # Create a new Usersinfo recod when a UserProfile is created
     def __init__(self, **kwargs):
-        self.user_info = UsersInfo()
         super(UserProfile, self).__init__(**kwargs)
 
     # A validation check for email format using a Python library like 'validate_email'.

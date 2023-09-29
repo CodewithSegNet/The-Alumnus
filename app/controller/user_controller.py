@@ -149,7 +149,7 @@ def user_by_id(alumni_id):
                     'grad_year': user.grad_year,
                     'username': user.username,
                     'email': user.email,
-                    'user_profile': user.userDescript
+                    'user_profile': user.user_description.userDescript
                     }
             
             return jsonify({'user': user_data}), 200
@@ -189,7 +189,7 @@ def get_users():
                     'full_name': full_name,
                     'username': user.username,
                     'grad_year': user.grad_year,
-                    'user_profile': user.userDescript
+                    'user_profile': user.user_description.userDescript
                     })
             return jsonify({'users': user_data}), 200
         else:

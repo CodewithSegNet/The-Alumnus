@@ -1,3 +1,4 @@
+"use client";
 import { Navbar, createStyles, getStylesRef, rem } from "@mantine/core";
 import {
   IconFingerprint,
@@ -6,8 +7,11 @@ import {
   IconLogout,
   IconUserCircle,
 } from "@tabler/icons-react";
+import Cookies from "js-cookie";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -84,40 +88,76 @@ const data = [
   { link: "/alumni", label: "alumni", icon: IconFingerprint },
   { link: "/login", label: "Login", icon: IconLogin },
   { link: "/signup", label: "Signup", icon: IconUserCircle },
-  { link: "/", label: "Log out", icon: IconLogout },
+  { link: "", label: "Log out", icon: IconLogout },
 ];
 
 export function SideNavBar() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("Billing");
+  const userId = Cookies.get("userId");
+  console.log("🚀 ~ file: SideNavBar.tsx:97 ~ SideNavBar ~ userId:", userId);
+  const router = useRouter();
 
-  const links = data.map((item) => (
-    <Link
-      className={cx(classes.link, {
-        [classes.linkActive]: item.label === active,
-      })}
-      href={item.link}
-      key={item.label}
-    >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label}</span>
-    </Link>
-  ));
+  // Function to clear the userId cookie
+  const handleLogout = () => {
+    Cookies.remove("userId"); // Remove the "userId" cookie
+    router.push("/");
+  };
+
+  const links = data.map((item) => {
+    // Check if there is no userId and the item is not "Log out"
+    if (userId === undefined && item.label !== "Log out") {
+      return (
+        <React.Fragment key={item.label}>
+          <Link
+            className={cx(classes.link, {
+              [classes.linkActive]: item.label === active,
+            })}
+            href={item.link}
+          >
+            <item.icon className={classes.linkIcon} stroke={1.5} />
+            <span>{item.label}</span>
+          </Link>
+        </React.Fragment>
+      );
+    } else if (userId) {
+      // If there is a userId, show all items
+      return (
+        <React.Fragment key={item.label}>
+          <Link
+            className={cx(classes.link, {
+              [classes.linkActive]: item.label === active,
+            })}
+            href={item.link}
+          >
+            <item.icon className={classes.linkIcon} stroke={1.5} />
+            <span>{item.label}</span>
+          </Link>
+        </React.Fragment>
+      );
+    } else if (item.label === "Log out") {
+      // If there is no userId and the item is "Log out", show it and attach the logout function
+      return (
+        <React.Fragment key={item.label}>
+          <a
+            className={cx(classes.link, {
+              [classes.linkActive]: item.label === active,
+            })}
+            href={item.link}
+            onClick={handleLogout} // Call the handleLogout function when clicked
+          >
+            <item.icon className={classes.linkIcon} stroke={1.5} />
+            <span>{item.label}</span>
+          </a>
+        </React.Fragment>
+      );
+    }
+    return null; // Hide the item if it's not "Log out" and there is no userId
+  });
 
   return (
     <Navbar height={1000} width={{ sm: 400 }} p="md">
       <Navbar.Section grow>{links}</Navbar.Section>
-
-      <Navbar.Section className={classes.footer}>
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
-        </a>
-      </Navbar.Section>
       <div className="bg-black w-screen  z-20 left-0 right-0 top-0"></div>
     </Navbar>
   );

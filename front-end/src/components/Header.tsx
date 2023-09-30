@@ -96,7 +96,7 @@ export function HeaderComponent() {
   });
 
   return (
-    <section className="relative">
+    <>
       <Header className={classes.positionFixed} height={56} mb={120}>
         <Container>
           <div className={classes.inner}>
@@ -126,6 +126,6 @@ export function HeaderComponent() {
           </div>
         </div>
       ) : null}
-    </section>
+    </>
   );
 }

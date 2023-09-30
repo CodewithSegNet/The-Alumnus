@@ -1,11 +1,14 @@
 import BaseLayout from "@/components/BaseLayout";
 import { Image } from "@mantine/core";
 import { useDisclosure } from "@nextui-org/react";
-import { useQuery } from "@tanstack/react-query";
+import { IconPencil } from "@tabler/icons-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ModalDelete from "./Modal";
+import ModalEditMessage from "./ModalEditMessage";
+import { editMessageApi } from "./api/EditMessage";
 import { deleteUser } from "./api/deleteUser";
 import { getUserData } from "./api/user";
 
@@ -14,8 +17,20 @@ const Events = () => {
   const { data, isLoading, isError } = useQuery(["user", userId], () =>
     getUserData(userId)
   );
+  const [formData, setFormData] = useState({
+    userDescript: "",
+  });
+
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isEditMessage,
+    onOpen: onEditMessage,
+    onOpenChange: onEditMessageChange,
+  } = useDisclosure();
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
@@ -45,6 +60,29 @@ const Events = () => {
     }
   };
 
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleEditMessage = async () => {
+    try {
+      setLoading(true);
+      const editedData = await editMessageApi(formData, userId);
+
+      // Invalidate the query to trigger a refetch
+      queryClient.invalidateQueries(["user", userId]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!userId) {
       // Redirect the user to the login page
@@ -65,8 +103,8 @@ const Events = () => {
 
   return (
     <BaseLayout>
-      <div className=" mt-5">
-        <section className="">
+      <>
+        <section className="mt-5">
           <section className="text-gray-600 body-font overflow-hidden">
             <div className="container px-5 py-24 mx-auto">
               <div className="  lg:flex ">
@@ -80,16 +118,25 @@ const Events = () => {
                     {data?.user?.last_name}{" "}
                   </h1>
                   <div className="flex mb-4">
-                    <a className="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                    <span className="flex-grow text-indigo-500 border-b-2 border-indigo-500 text-lg px-1">
                       Description
-                    </a>
+                    </span>
+                    <div
+                      onClick={onEditMessage}
+                      className="text-gray-600  border-b-2 border-indigo-500 flex gap-x-3 cursor-pointer"
+                    >
+                      <span className="">Edit Message</span>{" "}
+                      <span className="">
+                        {" "}
+                        <IconPencil size={24} color="blue" />
+                      </span>
+                    </div>
                   </div>
+
                   <p className="leading-relaxed mb-4">
-                    Fam locavore kickstarter distillery. Mixtape chillwave
-                    tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam
-                    inxigo juiceramps cornhole raw denim forage brooklyn.
-                    Everyday carry +1 seitan poutine tumeric. Gastropub blue
-                    bottle austin listicle pour-over, neutra jean.
+                    {data?.user?.user_profile === ""
+                      ? ` Welcome ${data?.user?.first_name} to the Alumni Please click on the edit message to tell us more about more about yourself.`
+                      : data?.user?.user_profile}
                   </p>
                   <div className="flex border-t capitalize border-gray-200 py-2">
                     <span className="text-gray-500">First Name</span>
@@ -113,6 +160,12 @@ const Events = () => {
                     <span className="text-gray-500">User Name</span>
                     <span className="ml-auto text-gray-900">
                       {data?.user?.username}
+                    </span>
+                  </div>
+                  <div className="flex border-t capitalize border-gray-200 py-2">
+                    <span className="text-gray-500">Email</span>
+                    <span className="ml-auto text-gray-900">
+                      {data?.user?.email}
                     </span>
                   </div>
                   <div className="flex border-t capitalize border-gray-200 py-2">
@@ -152,16 +205,32 @@ const Events = () => {
             </div>
           </section>
         </section>
+      </>
+      <div className="">
+        {" "}
+        <ModalDelete
+          isOpen={isOpen}
+          onOpen={onOpen}
+          isDeleting={isDeleting}
+          onOpenChange={onOpenChange}
+          buttonAction={() => {
+            handleDelete();
+          }}
+        />
       </div>
-      <ModalDelete
-        isOpen={isOpen}
-        onOpen={onOpen}
-        isDeleting={isDeleting}
-        onOpenChange={onOpenChange}
-        buttonAction={() => {
-          handleDelete();
-        }}
-      />
+      <div className="">
+        <ModalEditMessage
+          isOpen={isEditMessage}
+          onOpen={onEditMessage}
+          isDeleting={loading}
+          value={formData.userDescript}
+          onOpenChange={onEditMessageChange}
+          onchange={handleInputChange}
+          buttonAction={() => {
+            handleEditMessage();
+          }}
+        />
+      </div>
     </BaseLayout>
   );
 };

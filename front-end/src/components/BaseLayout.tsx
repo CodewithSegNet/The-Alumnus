@@ -8,11 +8,11 @@ interface Props {
 
 const BaseLayout = ({ children }: Props) => {
   return (
-    <main>
+    <>
       <HeaderComponent />
       <section className="min-h-screen">{children}</section>
       <FooterComponent />
-    </main>
+    </>
   );
 };
 

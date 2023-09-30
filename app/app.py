@@ -27,7 +27,7 @@ def create_app():
     app.register_blueprint(user_bp, url_prefix='/api')
 
     # Configure CORS to allow requests from any origin
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+    CORS(app)
 
     # create the datebase tables
     with app.app_context():

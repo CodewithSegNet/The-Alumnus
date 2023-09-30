@@ -133,7 +133,7 @@ const Events = () => {
                     </div>
                   </div>
 
-                  <p className="leading-relaxed mb-4">
+                  <p className="leading-relaxed mb-4 capitalize">
                     {data?.user?.user_profile === ""
                       ? ` Welcome ${data?.user?.first_name} to the Alumni Please click on the edit message to tell us more about more about yourself.`
                       : data?.user?.user_profile}

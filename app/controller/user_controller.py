@@ -161,7 +161,6 @@ def user_by_id(alumni_id):
 
 
 @user_bp.route('/users/search', methods=['GET'])
-@login_required
 def get_users():
     try:
         name = request.args.get('name')

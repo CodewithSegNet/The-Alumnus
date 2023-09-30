@@ -100,7 +100,7 @@ const CardSectionComponent = () => {
     <Container size="lg" py="xl">
       <Group position="center">
         <Badge color="#03045E" variant="filled" size="lg">
-          Best company ever
+          Best alumni ever
         </Badge>
       </Group>
 

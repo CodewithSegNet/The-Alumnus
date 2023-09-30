@@ -1,6 +1,7 @@
 "use client";
 import { Navbar, createStyles, getStylesRef, rem } from "@mantine/core";
 import {
+  IconAlertSquareRounded,
   IconFingerprint,
   IconHome2,
   IconLogin,
@@ -11,7 +12,6 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -84,7 +84,7 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
   { link: "/", label: "Home", icon: IconHome2 },
-  { link: "/about", label: "About Us", icon: IconHome2 },
+  { link: "/about", label: "About Us", icon: IconAlertSquareRounded },
   { link: "/alumni", label: "alumni", icon: IconFingerprint },
   { link: "/login", label: "Login", icon: IconLogin },
   { link: "/signup", label: "Signup", icon: IconUserCircle },
@@ -106,7 +106,11 @@ export function SideNavBar() {
 
   const links = data.map((item) => {
     // Check if there is no userId and the item is not "Log out"
-    if (userId === undefined && item.label !== "Log out") {
+    if (
+      (item.label !== "Login" && item.label !== "Signup") ||
+      userId === null ||
+      userId === undefined
+    ) {
       return (
         <React.Fragment key={item.label}>
           <Link
@@ -120,39 +124,9 @@ export function SideNavBar() {
           </Link>
         </React.Fragment>
       );
-    } else if (userId) {
-      // If there is a userId, show all items
-      return (
-        <React.Fragment key={item.label}>
-          <Link
-            className={cx(classes.link, {
-              [classes.linkActive]: item.label === active,
-            })}
-            href={item.link}
-          >
-            <item.icon className={classes.linkIcon} stroke={1.5} />
-            <span>{item.label}</span>
-          </Link>
-        </React.Fragment>
-      );
-    } else if (item.label === "Log out") {
-      // If there is no userId and the item is "Log out", show it and attach the logout function
-      return (
-        <React.Fragment key={item.label}>
-          <a
-            className={cx(classes.link, {
-              [classes.linkActive]: item.label === active,
-            })}
-            href={item.link}
-            onClick={handleLogout} // Call the handleLogout function when clicked
-          >
-            <item.icon className={classes.linkIcon} stroke={1.5} />
-            <span>{item.label}</span>
-          </a>
-        </React.Fragment>
-      );
+    } else {
+      return null; // Return null for "login" and "Sign-Up" when userId is null or undefined
     }
-    return null; // Hide the item if it's not "Log out" and there is no userId
   });
 
   return (

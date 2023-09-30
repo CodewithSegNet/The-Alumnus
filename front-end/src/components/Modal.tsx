@@ -33,7 +33,7 @@ console.log("🚀 ~ file: Modal.tsx:14 ~ ModalComponent ~ item:", item)
                   width="100%"
                   alt={item.title}
                   className="w-full object-cover h-[400px]"
-                  src={item.img}
+                  src={item}
                 />
               </ModalBody>
               <ModalFooter>

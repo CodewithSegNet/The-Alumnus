@@ -7,6 +7,7 @@ import {
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "./../assets/Home/logo.png";
@@ -86,14 +87,29 @@ const links: HeaderSearchProps[] = [
 export function HeaderComponent() {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
+  const userId = Cookies.get("userId");
 
-  const items = links.map((link) => {
+const items = links.map((link) => {
+  // Check if the link label is not "login" or "Sign-Up" or if userId is null or undefined
+  if (
+    (link.label !== "login" && link.label !== "Sign-Up") ||
+    userId === null ||
+    userId === undefined
+  ) {
     return (
-      <Link className={`${classes.link} text-primary`} href={link.link}>
+      <Link
+        className={`${classes.link} text-primary`}
+        href={link.link}
+        key={link.link}
+      >
         {link.label}
       </Link>
     );
-  });
+  } else {
+    return null; // Return null for "login" and "Sign-Up" when userId is present
+  }
+});
+
 
   return (
     <>

@@ -1,8 +1,9 @@
 import BaseLayout from "@/components/BaseLayout";
 import { Image } from "@mantine/core";
-import { useDisclosure } from "@nextui-org/react";
+import { Button, Input, useDisclosure } from "@nextui-org/react";
 import { IconPencil } from "@tabler/icons-react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,6 +13,17 @@ import { editMessageApi } from "./api/EditMessage";
 import { deleteUser } from "./api/deleteUser";
 import { getUserData } from "./api/user";
 
+const searchId = [
+  {
+    id: 1,
+    name: "search name",
+  },
+  {
+    id: 2,
+    name: "search grad year",
+  },
+];
+
 const Events = () => {
   const userId = Cookies.get("userId");
   const { data, isLoading, isError } = useQuery(["user", userId], () =>
@@ -20,10 +32,11 @@ const Events = () => {
   const [formData, setFormData] = useState({
     userDescript: "",
   });
-
-  const [response, setResponse] = useState(null);
+  const [searchIndex, setSearchIndex] = useState(1);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
+  const [name, setName] = useState("");
+  const [gradYear, setGradYear] = useState("");
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
@@ -83,6 +96,57 @@ const Events = () => {
     }
   };
 
+  const handleSearch = (id: any) => {
+    setSearchIndex(id);
+    setName("");
+  };
+
+  // Define a mutation function to reset the password
+  const searchName = useMutation(
+    async () => {
+      const response = await axios.get(
+        `https://the-alumnus-api.onrender.com/api/users/search?name=${name}`
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (data) => {
+        // Navigate to the search results page and pass the data as a query parameter
+        router.push({
+          pathname: "/search", // Replace with your actual page URL
+          query: { searchResults: JSON.stringify(data) },
+        });
+      },
+    }
+  );
+  // Define a mutation function to reset the password
+  const searchYear = useMutation(
+    async () => {
+      const response = await axios.get(
+        `https://the-alumnus-api.onrender.com/api/users/search?grad_year=${gradYear}`
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (data) => {
+        // Navigate to the search results page and pass the data as a query parameter
+        router.push({
+          pathname: "/searchyear", // Replace with your actual page URL
+          query: { searchResults: JSON.stringify(data) },
+        });
+      },
+    }
+  );
+
+  const handleSubmitName = (e: any) => {
+    e.preventDefault();
+    searchName.mutate(); // Trigger the mutation
+  };
+  const handleSubmitYear = (e: any) => {
+    e.preventDefault();
+    searchYear.mutate(); // Trigger the mutation
+  };
+
   useEffect(() => {
     if (!userId) {
       // Redirect the user to the login page
@@ -106,7 +170,66 @@ const Events = () => {
       <>
         <section className="mt-5">
           <section className="text-gray-600 body-font overflow-hidden">
-            <div className="container px-5 py-24 mx-auto">
+            <div className="container px-5 pb-24 pt-[80px] mx-auto">
+              <div className=" mx-auto w-full flex-col justify-center items-center">
+                <div className=" mb-10 mx-auto lg:w-[40%] ">
+                  <div className="flex  justify-between  mb-4 w-[80%] mx-auto">
+                    {searchId.map((item) => {
+                      return (
+                        <button
+                          onClick={() => handleSearch(item.id)}
+                          className={`capitalize  hover:text-indigo-500 ${
+                            item.id === searchIndex
+                              ? "border-b-2 border-[#03045E] text-black"
+                              : "text-gray-600"
+                          }`}
+                          key={item.id}
+                          type="button"
+                        >
+                          {item.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {searchIndex === 1 ? (
+                    <div className="flex relative">
+                      <Input
+                        type="text"
+                        placeholder="Enter Alumni Name"
+                        defaultValue=""
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        onSubmit={handleSubmitName}
+                      />
+                      <Button
+                        className="absolute -right-1 bg-[#03045E] text-white p-1.5 rounded-full"
+                        onClick={handleSubmitName}
+                        radius="full"
+                      >
+                        Search
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex relative">
+                      <Input
+                        type="text"
+                        placeholder="Enter Grad Year"
+                        onChange={(e) => setGradYear(e.target.value)}
+                        value={gradYear}
+                        onSubmit={handleSubmitYear}
+                        className=""
+                      />
+                      <Button
+                        className="absolute -right-1 bg-[#03045E] text-white p-1.5 rounded-full"
+                        onClick={handleSubmitYear}
+                        radius="full"
+                      >
+                        Search
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="  lg:flex ">
                 <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
                   <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -192,7 +315,7 @@ const Events = () => {
                     </button>
                   </div>
                 </div>
-                <div className="lg:w-1/2 w-full rounded-md">
+                <div className="lg:w-1/2 w-full hidden lg:block rounded-md">
                   <Image
                     alt="ecommerce"
                     height={600}

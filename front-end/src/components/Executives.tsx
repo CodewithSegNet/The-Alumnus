@@ -5,25 +5,25 @@ const excoData = [
     id: 1,
     name: "John Doe",
     position: "Chief Executive Officer",
-    img: "https://images.unsplash.com/photo-1562585195-97aff4b3848c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    img: "https://images.unsplash.com/photo-1692776778316-2305f48d879f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
   },
   {
     id: 2,
     name: "Linda Gift",
     position: "Secretary General",
-    img: "https://images.unsplash.com/photo-1562585195-97aff4b3848c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    img: "https://images.unsplash.com/photo-1562585195-97aff4b3848c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
   },
   {
     id: 3,
     name: "Sarah Doe",
     position: "Treasurer",
-    img: "https://images.unsplash.com/photo-1562585195-97aff4b3848c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1949&q=80",
   },
   {
     id: 4,
     name: "Michael Doe",
     position: "Chief Executive Officer",
-    img: "https://images.unsplash.com/photo-1562585195-97aff4b3848c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    img: "https://plus.unsplash.com/premium_photo-1682284353484-4e16001c58eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
   },
 ];
 const Executives = () => {
@@ -48,9 +48,11 @@ const Executives = () => {
                 <CardBody className="overflow-visible py-2">
                   <Image
                     alt="Card background"
-                    className="object-cover rounded-xl"
+                    className=" rounded-xl h-[200px] object-cover object-center w-full"
                     src={item.img}
-                    width={270}
+                    height={200}
+                    isZoomed
+                    width={"100%"}
                   />
                 </CardBody>
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

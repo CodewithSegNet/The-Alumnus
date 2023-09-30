@@ -170,7 +170,7 @@ def get_users():
         query = UserProfile.query
 
         if grad_year is not None:
-            query = query.filter(grad_year=grad_year).all()
+            query = query.filter(UserProfile.grad_year==grad_year).all()
         if name is not None:
             query = query.filter(or_(
                 UserProfile.first_name.ilike('%{}%'.format(name)),

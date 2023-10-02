@@ -131,7 +131,6 @@ const Reviews = () => {
         pagination={{
           clickable: false,
         }}
-        loop={true}
         navigation={false}
         modules={[Autoplay]}
         breakpoints={breakpoints}

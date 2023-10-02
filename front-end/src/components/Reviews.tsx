@@ -76,6 +76,30 @@ const reviewsdata = [
     member: "member",
     ratings: "1.3k",
   },
+  {
+    id: 6,
+    name: "zeus doe",
+    username: "@zeus",
+    avatar: "https://bit.ly/sage-adebayo",
+    review:
+      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    designation: "Frontend Developer",
+    followers: "Followers",
+    member: "member",
+    ratings: "1.3k",
+  },
+  {
+    id: 7,
+    name: "hades doe",
+    username: "@hades",
+    avatar: "https://bit.ly/sage-adebayo",
+    review:
+      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    designation: "Frontend Developer",
+    followers: "Followers",
+    member: "member",
+    ratings: "1.3k",
+  },
 ];
 
 const breakpoints = {
@@ -100,9 +124,8 @@ const Reviews = () => {
       <h1 className="text-3xl text-center">Alumni Reviews</h1>
       <Swiper
         spaceBetween={20}
-        centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -117,7 +140,7 @@ const Reviews = () => {
         {reviewsdata.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <Card className="max-w-[340px] bg-gray-600/50 text-white mt-10">
+              <Card className=" bg-gray-600/50 text-white mt-10">
                 <CardHeader className="justify-between">
                   <div className="flex gap-5">
                     <Avatar

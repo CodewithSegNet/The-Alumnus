@@ -245,11 +245,12 @@ function Register() {
                         Register To Alumni Account
                       </h4>
                       <p className="text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat.
+                        We believe that friendships can stand the test of time,
+                        life-changing experiences while you were with us, or the
+                        opportunity to engage with people and places around. The
+                        experience is an enduring one that continues long after
+                        your time with Us, and alumni across the globe help us
+                        celebrate the relationship they have with us.
                       </p>
                     </div>
                   </div>

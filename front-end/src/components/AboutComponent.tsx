@@ -6,13 +6,13 @@ const AboutComponent = () => {
     <div className=" lg:mx-[100px] mx-[20px] text-white text-center py-28">
       <h3 className="text-3xl">About The Alumnus</h3>
       <p className="py-2 lg:w-1/2 px-5 mx-auto text-lg">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem
-        eveniet ipsam id. Laboriosam labore nisi corporis, esse id officiis
-        fugiat blanditiis perspiciatis, accusamus error nihil harum fugit,
-        eveniet sapiente quas? Lorem ipsum dolor, sit amet consectetur
-        adipisicing elit. Dolorem eveniet ipsam id. Laboriosam labore nisi
-        corporis, esse id officiis fugiat blanditiis perspiciatis, accusamus
-        error nihil harum fugit, eveniet sapiente quas?
+        We believe that friendships can stand the test of time, life-changing
+        experiences while you were with us, or the opportunity to engage with
+        people and places around. The experience is an enduring one that
+        continues long after your time with Us, and alumni across the globe help
+        us celebrate the relationship they have with us. The alumni Executive
+        will be here to ensure enhanced connectivity with and between the alumni
+        community while maintaining a global family.
       </p>
       <Button
         radius="full"

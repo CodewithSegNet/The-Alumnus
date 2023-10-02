@@ -166,14 +166,15 @@ export function FooterComponent() {
             </Link>
           </div>
           <Text size="xs" color="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+            Our Platform fosters connections and facilitates engagement among
+            the alumni community of Lorem School.
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
-          © {currentYear} the-alumni. All rights reserved.
+          © {currentYear} The-alumnus. All rights reserved.
         </Text>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>

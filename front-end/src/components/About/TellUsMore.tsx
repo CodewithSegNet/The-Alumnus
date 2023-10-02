@@ -90,9 +90,9 @@ interface ContactIconsListProps {
 
 const MOCKDATA = [
   { title: "Email", description: "alumni@example.com", icon: IconAt },
-  { title: "Phone", description: "+49 (800) 335 35 35", icon: IconPhone },
+  { title: "Phone", description: "+2347060000000", icon: IconPhone },
   { title: "Address", description: "844 Morris Park avenue", icon: IconMapPin },
-  { title: "Working hours", description: "8 a.m. – 11 p.m.", icon: IconSun },
+  { title: "Working hours", description: "8 a.m. – 6 p.m.", icon: IconSun },
 ];
 
 export function ContactIconsList({

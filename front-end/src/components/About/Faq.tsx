@@ -6,18 +6,30 @@ export default function FaqComponent() {
   const [selectedKeys, setSelectedKeys] = React.useState<any>(new Set(["1"]));
 
   const defaultContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    "Our Platform fosters connections and facilitates engagement among the alumni community of Lorem School.";
 
   return (
-    <Accordion style={{ width: "100%" }} selectedKeys={selectedKeys} onSelectionChange={setSelectedKeys}>
-      <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
+    <Accordion
+      style={{ width: "100%" }}
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <AccordionItem
+        key="1"
+        aria-label="Accordion 1"
+        title="What’s The Alumnus:"
+      >
         {defaultContent}
       </AccordionItem>
-      <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-        {defaultContent}
+      <AccordionItem
+        key="2"
+        aria-label="Accordion 2"
+        title="How do I become a member of The Alumnus:"
+      >
+        To be a member of The Alumnus you simply sign up on our page.
       </AccordionItem>
-      <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
-        {defaultContent}
+      <AccordionItem key="3" aria-label="Accordion 3" title="How do I join?">
+        To join The Alumnus you simply sign up on our page.
       </AccordionItem>
     </Accordion>
   );

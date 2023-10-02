@@ -13,21 +13,21 @@ import { IconCookie, IconGauge, IconUser } from "@tabler/icons-react";
 
 const mockdata = [
   {
-    title: "Extreme performance",
+    title: "Objective",
     description:
-      "This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit",
+      "To provide a platform for the alumni to network, reconnect, and exchange ideas on academic, professional, cultural and social issues.",
     icon: IconGauge,
   },
   {
-    title: "Privacy focused",
+    title: "Already a Member?",
     description:
-      "People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma",
+      "If you are already a member of the Schools Alumni Association, check with your chapter’s Alumni Database to verify that your name is already there with all relevant information.",
     icon: IconUser,
   },
   {
-    title: "No third parties",
+    title: "Get Involved",
     description:
-      "They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves",
+      "The Alumnus offers a platform to get involved. The generosity of your time will make a big difference. Consider getting involved today!",
     icon: IconCookie,
   },
 ];
@@ -100,17 +100,17 @@ const CardSectionComponent = () => {
     <Container size="lg" py="xl">
       <Group position="center">
         <Badge color="#03045E" variant="filled" size="lg">
-          Best alumni ever
+          GET CONNECTED & STAY INFORMED
         </Badge>
       </Group>
 
       <Title order={2} className={classes.title} ta="center" mt="sm">
-        Integrate effortlessly with any technology stack
+        Get plugged into the Lorem school family today!.
       </Title>
 
       <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs.
-        This happens when hunger drives it to try biting a Steel-type Pokémon.
+        Most of us still remember our time at lorem school as some of our
+        happiest memories.
       </Text>
 
       <SimpleGrid

@@ -84,11 +84,11 @@ export function AboutHeader() {
           zIndex={0}
         />
         <Container className={classes.container}>
-          <Title className={classes.title}>About the Alumni</Title>
+          <Title className={classes.title}> About the Alumnus</Title>
           <Text className={classes.description} size="xl" mt="xl">
-            Build fully functional accessible web applications faster than ever
-            – Mantine includes more than 120 customizable components and hooks
-            to cover you in any situation
+            This initiative aims to provide a robust platform that grants alumni
+            access to a wide array of school-related activities and updates,
+            thus enhancing their sense of belonging and involvement.
           </Text>
         </Container>
       </div>
@@ -106,24 +106,12 @@ export function AboutHeader() {
             />
           </div>
           <div className="lg:pr-10 lg:w-[60%] w-full mt-10">
-            <h3 className="text-3xl lg:w-[90%]">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Voluptatibus, natus.
-            </h3>
+            <h3 className="text-3xl lg:w-[90%] capitalize">refer an alumni</h3>
             <p className="py-2  w-[90%]">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Veritatis magni maxime sint aliquid aliquam iusto dolorem aperiam
-              repudiandae, animi necessitatibus exercitationem labore sed
-              blanditiis veniam saepe id repellat quidem perspiciatis. Vitae
-              dolorum placeat in fuga reprehenderit quae natus molestiae
-              accusamus fugiat a, temporibus neque impedit eum illum laborum.
-              Est possimus delectus reiciendis incidunt, veniam reprehenderit
-              odio, ad aperiam ullam dolorem voluptatum soluta necessitatibus
-              doloremque tempora? Non, itaque. Similique quas fuga id
-              exercitationem unde quam a voluptatibus itaque sequi aliquam
-              laborum, labore laboriosam sint enim possimus corrupti iusto
-              commodi dolores ipsum aspernatur! Voluptate libero facere
-              laboriosam tempore a modi, voluptas similique.
+              Our goal is to reach as many as 30,000 and counting Alumni all
+              over the world. Yes, this is a conservative number of students who
+              have marched through Lorem School and into great futures! Reach as
+              many of your fellow old schoolmates.
             </p>
           </div>
         </div>

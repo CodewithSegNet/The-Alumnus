@@ -20,9 +20,10 @@ const reviewsdata = [
     id: 1,
     name: "Zoey Lang",
     username: "@zoeylang",
-    avatar: "https://bit.ly/sage-adebayo",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=50",
     review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+      " best alumni ever seen, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -33,8 +34,7 @@ const reviewsdata = [
     name: "john doe",
     username: "@johndoe",
     avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -44,9 +44,9 @@ const reviewsdata = [
     id: 3,
     name: "jane doe",
     username: "@janedoe",
-    avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=50",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -57,8 +57,7 @@ const reviewsdata = [
     name: "segun doe",
     username: "@segundoe",
     avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -68,9 +67,9 @@ const reviewsdata = [
     id: 5,
     name: "shogo doe",
     username: "@shogodo",
-    avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=50",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -81,8 +80,7 @@ const reviewsdata = [
     name: "zeus doe",
     username: "@zeus",
     avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -92,9 +90,9 @@ const reviewsdata = [
     id: 7,
     name: "hades doe",
     username: "@hades",
-    avatar: "https://bit.ly/sage-adebayo",
-    review:
-      " Frontend developer and UI/UX enthusiast. Join me on this coding adventure!",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=50",
+    review: " best alumni ever, am happy to be part of the great institute",
     designation: "Frontend Developer",
     followers: "Followers",
     member: "member",
@@ -146,7 +144,7 @@ const Reviews = () => {
                       isBordered
                       radius="full"
                       size="md"
-                      src="https://bit.ly/sage-adebayo"
+                      src={item.avatar}
                     />
                     <div className="flex flex-col gap-1 items-start justify-center">
                       <h4 className="text-small font-semibold leading-none text-default-600">

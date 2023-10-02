@@ -106,9 +106,8 @@ export function BannerSlider() {
                   The Alumnus
                 </h3>
                 <p className="lg:w-[70%]  text-white  text-[20px]">
-                  Build fully functional accessible web applications faster than
-                  ever – Mantine includes more than 120 customizable components
-                  and hooks to cover you in any situation
+                  Our Platform fosters connections and facilitates engagement
+                  among the alumni community of Lorem School.
                 </p>
                 <Button
                   radius="full"

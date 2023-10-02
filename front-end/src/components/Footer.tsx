@@ -13,7 +13,8 @@ import {
   IconBrandYoutube,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import logo from "./../assets/Home/logo.png";
+import Link from "next/link";
+import logo from "./../assets/Home/logo.svg";
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -154,7 +155,15 @@ export function FooterComponent() {
         <div className={classes.logo}>
           {/* <MantineLogo size={30} /> */}
           <div className="">
-            <Image alt="logo" src={logo} width={30} height={30} />
+            <Link href="/">
+              <Image
+                className="object-cover"
+                alt="logo"
+                src={logo}
+                width={100}
+                height={80}
+              />
+            </Link>
           </div>
           <Text size="xs" color="dimmed" className={classes.description}>
             Build fully functional accessible web applications faster than ever

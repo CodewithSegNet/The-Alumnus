@@ -7,6 +7,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import ModalDelete from "./Modal";
 import ModalEditMessage from "./ModalEditMessage";
 import { editMessageApi } from "./api/EditMessage";
@@ -37,6 +38,7 @@ const Events = () => {
   const queryClient = useQueryClient();
   const [name, setName] = useState("");
   const [gradYear, setGradYear] = useState("");
+  console.log("🚀 ~ file: alumni.tsx:41 ~ Events ~ gradYear:", gradYear);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
@@ -102,37 +104,82 @@ const Events = () => {
   };
 
   // Define a mutation function to reset the password
+
   const searchName = useMutation(
     async () => {
       const response = await axios.get(
         `https://the-alumnus-api.onrender.com/api/users/search?name=${name}`
       );
-      return response.data;
+      const searchData = response.data;
+
+      return searchData;
     },
     {
       onSuccess: (data) => {
-        // Navigate to the search results page and pass the data as a query parameter
+        // Display a success toast message and navigate to the search results page
+        toast.success(`Search found for, ${name}`, {
+          position: "top-right",
+          autoClose: 2000, // in milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
         router.push({
-          pathname: "/search", // Replace with your actual page URL
+          pathname: "/search",
           query: { searchResults: JSON.stringify(data) },
+        });
+      },
+      onError: () => {
+        // Display an error toast message
+        toast.error(`Search not found for, ${name}`, {
+          position: "top-right",
+          autoClose: 2000, // in milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       },
     }
   );
-  // Define a mutation function to reset the password
+
   const searchYear = useMutation(
     async () => {
       const response = await axios.get(
         `https://the-alumnus-api.onrender.com/api/users/search?grad_year=${gradYear}`
       );
-      return response.data;
+      const searchData = response.data;
+
+      return searchData;
     },
     {
       onSuccess: (data) => {
-        // Navigate to the search results page and pass the data as a query parameter
+        // Display a success toast message and navigate to the search results page
+        toast.success(`Search result found`, {
+          position: "top-right",
+          autoClose: 2000, // in milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
         router.push({
-          pathname: "/searchyear", // Replace with your actual page URL
+          pathname: "/searchyear",
           query: { searchResults: JSON.stringify(data) },
+        });
+      },
+      onError: () => {
+        // Display an error toast message
+        toast.error(`Search result not found`, {
+          position: "top-right",
+          autoClose: 2000, // in milliseconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       },
     }
@@ -216,6 +263,7 @@ const Events = () => {
                         placeholder="Enter Grad Year"
                         onChange={(e) => setGradYear(e.target.value)}
                         value={gradYear}
+                        defaultValue=""
                         onSubmit={handleSubmitYear}
                         className=""
                       />

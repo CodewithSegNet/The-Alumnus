@@ -10,7 +10,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "./../assets/Home/logo.png";
+import logo from "./../assets/Home/logo.svg";
 import { SideNavBar } from "./SideNavBar";
 
 const useStyles = createStyles((theme) => ({
@@ -89,27 +89,26 @@ export function HeaderComponent() {
   const { classes } = useStyles();
   const userId = Cookies.get("userId");
 
-const items = links.map((link) => {
-  // Check if the link label is not "login" or "Sign-Up" or if userId is null or undefined
-  if (
-    (link.label !== "login" && link.label !== "Sign-Up") ||
-    userId === null ||
-    userId === undefined
-  ) {
-    return (
-      <Link
-        className={`${classes.link} text-primary`}
-        href={link.link}
-        key={link.link}
-      >
-        {link.label}
-      </Link>
-    );
-  } else {
-    return null; // Return null for "login" and "Sign-Up" when userId is present
-  }
-});
-
+  const items = links.map((link) => {
+    // Check if the link label is not "login" or "Sign-Up" or if userId is null or undefined
+    if (
+      (link.label !== "login" && link.label !== "Sign-Up") ||
+      userId === null ||
+      userId === undefined
+    ) {
+      return (
+        <Link
+          className={`${classes.link} text-primary`}
+          href={link.link}
+          key={link.link}
+        >
+          {link.label}
+        </Link>
+      );
+    } else {
+      return null; // Return null for "login" and "Sign-Up" when userId is present
+    }
+  });
 
   return (
     <>
@@ -117,8 +116,16 @@ const items = links.map((link) => {
         <Container>
           <div className={classes.inner}>
             {/* <MantineLogo size={28} /> */}
-            <div className="">
-              <Image alt="logo" src={logo} width={30} height={30} />
+            <div>
+              <Link href="/">
+                <Image
+                  className="object-cover"
+                  alt="logo"
+                  src={logo}
+                  width={100}
+                  height={80}
+                />
+              </Link>
             </div>
             <Group
               spacing={5}

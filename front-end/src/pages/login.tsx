@@ -13,8 +13,6 @@ import { loginApi } from "./api/login";
 
 const Login = () => {
   const { mutate, isLoading, isError, isSuccess } = useMutation(loginApi);
-  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isSuccess:", isSuccess);
-  console.log("🚀 ~ file: login.tsx:15 ~ Login ~ isError:", isError);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

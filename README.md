@@ -12,18 +12,16 @@ The Alumnus Project is a web application designed to foster connections and faci
 
 - *Professionalism and Collaboration* : Practice working in a professional software development environment. Collaborate with team members to ensure the successful implementation of project features and functionalities
 
-- *API Integration* : Learn how to integrate external libraries and APIs into a web application. In this case, utilize the JWT library for secure token-based authentication.
+- *API Integration* : Learn how to integrate external libraries and APIs into a web application.
 
-- *User Authentication* : Understand the principles of user authentication and security. Implement JWT-based authentication to protect user data and control access to sensitive features.
-
+- *User Authentication* : Understand the principles of user authentication and security.
+- 
 - *Project Planning and Documentation* : Gain experience in planning and documenting a software project. Define project objectives, create a functional specification, and write comprehensive code documentation.
 
 ## Technologies Used:
 
 - Python
-- Figma
 - Mysql(sqlAlchemy)
-- JWT Authentication
 - Next js(react) front end framework
 - Tailwind css ( styling)
 - React query (api query)

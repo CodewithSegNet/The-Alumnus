@@ -21,7 +21,7 @@ The Alumnus Project is a web application designed to foster connections and faci
 ## Technologies Used:
 
 - Python
-- Figma
+- PostgreSql
 - Mysql(sqlAlchemy)
 - Session Management
 - Next js(react) front end framework 

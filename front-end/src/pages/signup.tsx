@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import logo from "./../assets/Home/logo.png";
+import logo from "./../assets/Home/logo.svg";
 import { signUpApi } from "./api/signup";
 import Link from "next/link";
 
@@ -73,15 +73,14 @@ function Register() {
                   <div className="px-4 md:px-0 lg:w-6/12">
                     <div className="md:mx-6 md:p-12">
                       {/* <!--Logo--> */}
-                      <div className="text-center">
+                      <div className="mb-12 mt-1 pb-1">
                         <Image
-                          className="mx-auto w-20 h-20"
-                          src={logo}
+                          className="object-cover  mx-auto"
                           alt="logo"
+                          src={logo}
+                          width={150}
+                          height={100}
                         />
-                        <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
-                          Alumni
-                        </h4>
                       </div>
                       <>
                         {isSuccess ? (

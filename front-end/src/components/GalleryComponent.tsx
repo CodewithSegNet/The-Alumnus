@@ -116,7 +116,7 @@ const GalleryComponent = () => {
               size="md"
               className="bg-white text-primary rounded-none py-6 px-8"
             >
-              Primary
+              Submit
             </Button>
           </div>
         </div>

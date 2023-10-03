@@ -306,7 +306,7 @@ const Events = () => {
 
                   <p className="leading-relaxed mb-4 capitalize">
                     {data?.user?.user_profile === ""
-                      ? ` Welcome ${data?.user?.first_name} to the Alumni Please click on the edit message to tell us more about more about yourself.`
+                      ? ` Welcome ${data?.user?.first_name} to the Alumni Please click on the edit message to tell us more about  yourself.`
                       : data?.user?.user_profile}
                   </p>
                   <div className="flex border-t capitalize border-gray-200 py-2">
@@ -353,7 +353,7 @@ const Events = () => {
                       }}
                       className="  text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded capitalize"
                     >
-                      {"Delete"}
+                      {"Delete Account"}
                     </button>
                     <button
                       onClick={logout}

@@ -11,14 +11,13 @@ export const loginApi = async (formData: any) => {
           "Content-Type": "application/json",
           // Authorization: `${token}`, // Include the token in the request header
         },
-        
       }
     );
 
     // Assuming the response contains an 'id' field
     const { alumni_id } = response.data;
     // Save the 'id' in a cookie
-    Cookies.set("userId", alumni_id, { expires: 7 }); // Set the cookie to expire in 7 days
+    Cookies.set("userId", alumni_id, { expires: 2 }); // Set the cookie to expire in 7 days
 
     return response.data;
   } catch (error) {
